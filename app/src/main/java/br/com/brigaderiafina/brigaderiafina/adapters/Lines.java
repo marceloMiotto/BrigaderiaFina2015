@@ -4,17 +4,14 @@ import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.R;
 
-/**
- * Created by Marcelo_Miotto on 12/16/2015.
- */
 public class Lines {
 
     public String lineName;
-    public int linePhoto;
+    public int linePhotoId;
 
     public Lines(String lineName, int linePhoto){
         this.lineName  = lineName;
-        this.linePhoto = linePhoto;
+        this.linePhotoId = linePhoto;
     }
 
     public static ArrayList<Lines> getLines(){

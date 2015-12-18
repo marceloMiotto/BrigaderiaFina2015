@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
-
 import br.com.brigaderiafina.brigaderiafina.R;
 
 public class ImageLinesAdapter extends ArrayAdapter<Lines> {
@@ -31,7 +30,7 @@ public class ImageLinesAdapter extends ArrayAdapter<Lines> {
         ImageView photoIdImageView = (ImageView)convertView.findViewById(R.id.photoIdImageView);
 
         lineNameTextView.setText(line.lineName);
-        photoIdImageView.setImageResource(line.linePhoto);
+        photoIdImageView.setImageResource(line.linePhotoId);
 
         return convertView;
     }
