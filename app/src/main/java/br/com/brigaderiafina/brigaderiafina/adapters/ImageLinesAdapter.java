@@ -11,9 +11,6 @@ import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.R;
 
-/**
- * Created by Marcelo_Miotto on 12/16/2015.
- */
 public class ImageLinesAdapter extends ArrayAdapter<Lines> {
 
     private Context mContext;
