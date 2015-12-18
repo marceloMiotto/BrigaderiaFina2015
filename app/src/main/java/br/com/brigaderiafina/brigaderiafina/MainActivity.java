@@ -10,6 +10,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     public static String MAIN_LIST_VIEW = "MAIN_LIST_VIEW";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         MainActivityFragment fragment = new MainActivityFragment();
         fragmentTransaction.add(R.id.main_fragment_container, fragment, MAIN_LIST_VIEW);
         fragmentTransaction.commit();
-
     }
 
 
