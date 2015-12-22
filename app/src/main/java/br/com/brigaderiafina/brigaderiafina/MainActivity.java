@@ -3,6 +3,7 @@ package br.com.brigaderiafina.brigaderiafina;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,11 +11,17 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity {
 
     public static String MAIN_LIST_VIEW = "MAIN_LIST_VIEW";
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.ToolBarId);
+        setSupportActionBar(toolbar);
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MainActivityFragment fragment = new MainActivityFragment();
