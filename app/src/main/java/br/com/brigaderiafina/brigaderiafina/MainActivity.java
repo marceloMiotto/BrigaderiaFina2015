@@ -22,6 +22,16 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.ToolBarId);
         setSupportActionBar(toolbar);
 
+        /*
+        ** Added from http://stackoverflow.com/questions/4776933/android-application-icon-not-showing-up
+         */
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        /*
+        ** Added End
+         */
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         MainActivityFragment fragment = new MainActivityFragment();

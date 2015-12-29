@@ -6,18 +6,23 @@
     android:layout_height="match_parent"
     android:id="@+id/list_item_main">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_margin"
-        android:id="@+id/photoIdImageView"/>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/LinesTitleMargin"
         android:id="@+id/lineNameTextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
         />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/photoIdImageView"
+        android:scaleType="centerCrop"
+        android:layout_margin="@dimen/layout_margin"
+        android:layout_marginBottom="@dimen/layout_margin"
+        />
+
 
 </LinearLayout>

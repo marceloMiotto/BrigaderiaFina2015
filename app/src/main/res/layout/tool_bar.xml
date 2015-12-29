@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:background="@color/PrimaryColor"
     android:elevation="@dimen/PrimaryElevation"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:layout_marginBottom="@dimen/layout_margin">
 
 </android.support.v7.widget.Toolbar>

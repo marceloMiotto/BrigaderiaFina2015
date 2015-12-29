@@ -3,4 +3,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">Brigaderia Fina</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail_activity_fragment">DetailActivityFragment</string>
 </resources>

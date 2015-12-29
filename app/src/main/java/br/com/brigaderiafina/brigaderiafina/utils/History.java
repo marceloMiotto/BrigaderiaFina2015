@@ -1,4 +1,4 @@
-package br.com.brigaderiafina.brigaderiafina;
+package br.com.brigaderiafina.brigaderiafina.utils;
 
 public class History {
 
@@ -21,6 +21,9 @@ public class History {
  *  MainActivityFragment               Fragment     ???
  *  ImageLinesAdapter                  Java Class   ???
  *  Lines                              Java Class   ???
+ *  DetailActivity                     Activity     ???
+ *  DetailActivityFragment             Fragment     ???
+ *  Constants                          Java Class   ???
  *
  *  History:
  *  Name               Date                 Version      Description

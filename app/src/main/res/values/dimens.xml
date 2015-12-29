@@ -6,8 +6,10 @@
 
     <!-- custom dimens -->
     <dimen name="layout_margin">16dp</dimen>
+    <dimen name="LinesTitleMargin">8dp</dimen>
     <dimen name="PrimaryElevation">4dp</dimen>
     <dimen name="SecondaryElevation">8dp</dimen>
     <dimen name="ThirdElevation">12dp</dimen>
+    <dimen name="activity_top_margin">64dp</dimen>
 
 </resources>
