@@ -11,4 +11,18 @@ public class Constants {
     public static final String EVENT_LINE    = "Eventos";
     public static final String LINE_NAME     = "LINE NAME";
     public static final String LOG_TAG       = "Debug APP";
+
+    /**
+     * JSON
+     */
+    public static final String OWM_CATALOG        = "catalogo";
+    public static final String OWM_LINES          = "linha";
+    public static final String OWM_LINE_NAME      = "linha_nome";
+    public static final String OWM_GROUPS         = "grupo";
+    public static final String OWM_GROUP_NAME     = "grupo_nome";
+    public static final String OWM_GROUP_PHOTO    = "foto";
+    public static final String OWM_SUBGROUPS      = "subgrupo";
+    public static final String OWM_SUBGROUP_NAME  = "subgrupo_nome";
+    public static final String OWM_SUBGROUP_PRICE = "preco";
+    public static final String OWM_FLAVORS        = "sabores";
 }

@@ -24,6 +24,8 @@ public class History {
  *  DetailActivity                     Activity     ???
  *  DetailActivityFragment             Fragment     ???
  *  Constants                          Java Class   ???
+ *  FetchCatalogTask                   Java Class   ???
+ *
  *
  *  History:
  *  Name               Date                 Version      Description

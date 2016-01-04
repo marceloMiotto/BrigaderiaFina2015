@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import br.com.brigaderiafina.brigaderiafina.AsyncTasks.FetchCatalogTask;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogContract;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
@@ -50,15 +51,15 @@ public class MainActivity extends AppCompatActivity {
          * Database Insert Test Begin
          */
 
-        Log.i(Constants.LOG_TAG,"Database Insert Test Begin");
+        Log.i(Constants.LOG_TAG, "Database Insert Test Begin");
 
         CatalogDbHelper mDbHelper = new CatalogDbHelper(this);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-       /**
-        * ModuleVersion
-        */
-       // Create a new map of values, where column names are the keys
+        /**
+         * ModuleVersion
+         */
+        // Create a new map of values, where column names are the keys
         ContentValues moduleValues = new ContentValues();
         moduleValues.put(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME, "price_version");
         moduleValues.put(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION, "1");
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 CatalogContract.ModuleVersion.TABLE_NAME,
                 CatalogContract.COLUMN_NAME_NULLABLE,
                 moduleValues);
-        Log.i(Constants.LOG_TAG,"Module Version Row Id" + newModuleRowId);
+        Log.i(Constants.LOG_TAG, "Module Version Row Id" + newModuleRowId);
         /**
          * CatalogSubgroup
          */
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 CatalogContract.CatalogSubgroup.TABLE_NAME,
                 CatalogContract.COLUMN_NAME_NULLABLE,
                 catalogSubgroupValues);
-        Log.i(Constants.LOG_TAG,"Catalog Subgroup Row Id" + newCatalogSubgroupRowId);
+        Log.i(Constants.LOG_TAG, "Catalog Subgroup Row Id" + newCatalogSubgroupRowId);
 
         /**
          * CatalogSubgroupFlavors
@@ -99,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 CatalogContract.COLUMN_NAME_NULLABLE,
                 catalogSubgroupFlavorsValues);
 
-        Log.i(Constants.LOG_TAG,"Catalog Subgroup Flavors Row Id" + newCatalogSubgroupFlavorsRowId);
-        Log.i(Constants.LOG_TAG,"Database Insert Test End");
+        Log.i(Constants.LOG_TAG, "Catalog Subgroup Flavors Row Id" + newCatalogSubgroupFlavorsRowId);
+        Log.i(Constants.LOG_TAG, "Database Insert Test End");
 
         /**
          * Database Insert Test End
@@ -110,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Database Select Test Begin
          */
-          Log.i(Constants.LOG_TAG,"Database Select Test Begin");
-          SQLiteDatabase dbS = mDbHelper.getReadableDatabase();
+        Log.i(Constants.LOG_TAG, "Database Select Test Begin");
+        SQLiteDatabase dbS = mDbHelper.getReadableDatabase();
 
         /**
          * ModuleVersion
          */
         Log.i(Constants.LOG_TAG, "Module Version");
-          String[] projection = {
-                  CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME,
-                  CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION
+        String[] projection = {
+                CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME,
+                CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION
         };
 
 
@@ -139,11 +140,11 @@ public class MainActivity extends AppCompatActivity {
         String moduleName;
         String moduleVersion;
         c.moveToFirst();
-        while(c.moveToNext()) {
-            moduleName    = c.getString(c.getColumnIndexOrThrow(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME));
+        while (c.moveToNext()) {
+            moduleName = c.getString(c.getColumnIndexOrThrow(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME));
             moduleVersion = c.getString(c.getColumnIndexOrThrow(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION));
-            Log.i(Constants.LOG_TAG,"Module Name:    "+moduleName);
-            Log.i(Constants.LOG_TAG,"Module Version: "+moduleVersion);
+            Log.i(Constants.LOG_TAG, "Module Name:    " + moduleName);
+            Log.i(Constants.LOG_TAG, "Module Version: " + moduleVersion);
         }
         c.close();
 
@@ -179,15 +180,15 @@ public class MainActivity extends AppCompatActivity {
         String subgroupPhoto;
 
         cS.moveToFirst();
-        while(cS.moveToNext()) {
-            lineName      = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME));
-            subgroupName  = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
+        while (cS.moveToNext()) {
+            lineName = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME));
+            subgroupName = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
             subgroupPrice = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
             subgroupPhoto = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
-            Log.i(Constants.LOG_TAG,"Line Name:      "+lineName);
-            Log.i(Constants.LOG_TAG,"Subgroup Name:  "+subgroupName);
-            Log.i(Constants.LOG_TAG,"Subgroup Price: "+subgroupPrice);
-            Log.i(Constants.LOG_TAG,"Subgroup Photo: "+subgroupPhoto);
+            Log.i(Constants.LOG_TAG, "Line Name:      " + lineName);
+            Log.i(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
+            Log.i(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
+            Log.i(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
         }
         cS.close();
 
@@ -219,20 +220,40 @@ public class MainActivity extends AppCompatActivity {
         String subgroupFlavors;
 
         cSF.moveToFirst();
-        while(cSF.moveToNext()) {
-            subgroupName     = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME));
-            subgroupFlavors  = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS));
-            Log.i(Constants.LOG_TAG,"Subgroup Name:    "+subgroupName);
-            Log.i(Constants.LOG_TAG,"Subgroup Flavors: "+subgroupFlavors);
+        while (cSF.moveToNext()) {
+            subgroupName = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME));
+            subgroupFlavors = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS));
+            Log.i(Constants.LOG_TAG, "Subgroup Name:    " + subgroupName);
+            Log.i(Constants.LOG_TAG, "Subgroup Flavors: " + subgroupFlavors);
         }
         cSF.close();
 
         Log.i(Constants.LOG_TAG, "Database Select Test End");
 
+
         /**
          * Database Select Test End
          */
+
+        /**
+         * JSON Test Begin
+         */
+        updateCatalog();
+
+        /**
+         * JSON Test End
+         */
+
     }
+
+
+
+    protected void updateCatalog() {
+        FetchCatalogTask fetchCatalogTask = new FetchCatalogTask();
+        fetchCatalogTask.execute();
+    }
+
+
 
 
     @Override

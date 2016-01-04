@@ -18,6 +18,7 @@ public final class CatalogContract {
     public static abstract class CatalogSubgroup implements BaseColumns{
         public static final String TABLE_NAME                 = "subgroups";
         public static final String COLUMN_NAME_LINE_NAME      = "line";
+        public static final String COLUMN_NAME_GROUP_NAME     = "group_name";
         public static final String COLUMN_NAME_SUBGRUPO_NAME  = "name";
         public static final String COLUMN_NAME_SUBGRUPO_PRICE = "price";
         public static final String COLUMN_NAME_SUBGRUPO_PHOTO = "photo";
