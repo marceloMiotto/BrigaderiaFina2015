@@ -33,7 +33,7 @@ public class FetchCatalogTask extends AsyncTask<String, Void, JSONArray> {
 
 
     private final String AUTH_ID = "auth_id";
-    private final String API_KEY = "4981bb031dc179bd13edbda08a64dd94";
+    private final String API_KEY = "xxxxxxx";
     private final String CATALOG_BASE_URL = "http://www.brigaderiafina.com.br/mobile/database/database.php?";
 
     @Override
