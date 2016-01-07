@@ -25,6 +25,7 @@ public class History {
  *  DetailActivityFragment             Fragment     ???
  *  Constants                          Java Class   ???
  *  FetchCatalogTask                   Java Class   ???
+ *  JSONFetch                          Java Class   ???
  *
  *
  *  History:

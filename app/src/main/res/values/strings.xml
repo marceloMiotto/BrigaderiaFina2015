@@ -5,4 +5,12 @@
     <string name="title_activity_main">Brigaderia Fina</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_detail_activity_fragment">DetailActivityFragment</string>
+    <!--shared preferences -->
+    <string name="file_key_pref">br.com.brigaderiafina.brigaderiafina.#PREF</string>
+    <string name="subgroup_module_version_app_pref">subgroupApp</string>
+    <string name="subgroup_module_version_server_pref">subgroupServer</string>
+    <string name="events_module_version_app_pref">eventsApp</string>
+    <string name="events_module_version_server_pref">eventsServer</string>
+    <string name="module_version_default_pref">1</string>
+    <string name="first_access_pref">first_access</string>
 </resources>

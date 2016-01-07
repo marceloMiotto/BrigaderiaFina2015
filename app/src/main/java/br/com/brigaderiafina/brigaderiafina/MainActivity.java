@@ -3,6 +3,7 @@ package br.com.brigaderiafina.brigaderiafina;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.brigaderiafina.brigaderiafina.AsyncTasks.FetchCatalogTask;
+import br.com.brigaderiafina.brigaderiafina.AsyncTasks.FetchVersionTask;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogContract;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static String MAIN_LIST_VIEW = "MAIN_LIST_VIEW";
     private Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,29 +50,22 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.main_fragment_container, fragment, MAIN_LIST_VIEW);
         fragmentTransaction.commit();
 
+
+        /**
+         * Update catalog if necessary
+         */
+        verifyCatalogVersion();
+
+
         /**
          * Database Insert Test Begin
          */
 
-        Log.i(Constants.LOG_TAG, "Database Insert Test Begin");
+        //Log.i(Constants.LOG_TAG, "Database Insert Test Begin");
 
         CatalogDbHelper mDbHelper = new CatalogDbHelper(this);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-        /**
-         * ModuleVersion
-         */
-        // Create a new map of values, where column names are the keys
-        ContentValues moduleValues = new ContentValues();
-        moduleValues.put(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME, "price_version");
-        moduleValues.put(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION, "1");
-        // Insert the new row, returning the primary key value of the new row
-        long newModuleRowId;
-        newModuleRowId = db.insert(
-                CatalogContract.ModuleVersion.TABLE_NAME,
-                CatalogContract.COLUMN_NAME_NULLABLE,
-                moduleValues);
-        Log.i(Constants.LOG_TAG, "Module Version Row Id" + newModuleRowId);
         /**
          * CatalogSubgroup
          */
@@ -85,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 CatalogContract.CatalogSubgroup.TABLE_NAME,
                 CatalogContract.COLUMN_NAME_NULLABLE,
                 catalogSubgroupValues);
-        Log.i(Constants.LOG_TAG, "Catalog Subgroup Row Id" + newCatalogSubgroupRowId);
+        //Log.i(Constants.LOG_TAG, "Catalog Subgroup Row Id" + newCatalogSubgroupRowId);
 
         /**
          * CatalogSubgroupFlavors
@@ -100,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
                 CatalogContract.COLUMN_NAME_NULLABLE,
                 catalogSubgroupFlavorsValues);
 
-        Log.i(Constants.LOG_TAG, "Catalog Subgroup Flavors Row Id" + newCatalogSubgroupFlavorsRowId);
-        Log.i(Constants.LOG_TAG, "Database Insert Test End");
+        //Log.i(Constants.LOG_TAG, "Catalog Subgroup Flavors Row Id" + newCatalogSubgroupFlavorsRowId);
+        //Log.i(Constants.LOG_TAG, "Database Insert Test End");
 
         /**
          * Database Insert Test End
@@ -111,48 +107,13 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Database Select Test Begin
          */
-        Log.i(Constants.LOG_TAG, "Database Select Test Begin");
+        //Log.i(Constants.LOG_TAG, "Database Select Test Begin");
         SQLiteDatabase dbS = mDbHelper.getReadableDatabase();
-
-        /**
-         * ModuleVersion
-         */
-        Log.i(Constants.LOG_TAG, "Module Version");
-        String[] projection = {
-                CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME,
-                CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION
-        };
-
-
-        String sortOrder =
-                CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME + " DESC";
-
-        Cursor c = dbS.query(
-                CatalogContract.ModuleVersion.TABLE_NAME,  // The table to query
-                projection,                                // The columns to return
-                null,                                      // The columns for the WHERE clause
-                null,                                      // The values for the WHERE clause
-                null,                                      // don't group the rows
-                null,                                      // don't filter by row groups
-                sortOrder                                  // The sort order
-        );
-
-        String moduleName;
-        String moduleVersion;
-        c.moveToFirst();
-        while (c.moveToNext()) {
-            moduleName = c.getString(c.getColumnIndexOrThrow(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_NAME));
-            moduleVersion = c.getString(c.getColumnIndexOrThrow(CatalogContract.ModuleVersion.COLUMN_NAME_MODULE_VERSION));
-            Log.i(Constants.LOG_TAG, "Module Name:    " + moduleName);
-            Log.i(Constants.LOG_TAG, "Module Version: " + moduleVersion);
-        }
-        c.close();
-
 
         /**
          * CatalogSubgroup
          */
-        Log.i(Constants.LOG_TAG, "Catalog Subgroup");
+        //Log.i(Constants.LOG_TAG, "Catalog Subgroup");
 
         String[] projectionS = {
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME,
@@ -185,10 +146,10 @@ public class MainActivity extends AppCompatActivity {
             subgroupName = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
             subgroupPrice = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
             subgroupPhoto = cS.getString(cS.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
-            Log.i(Constants.LOG_TAG, "Line Name:      " + lineName);
-            Log.i(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
-            Log.i(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
-            Log.i(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
+            //Log.i(Constants.LOG_TAG, "Line Name:      " + lineName);
+            //Log.i(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
+            //Log.i(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
+            //Log.i(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
         }
         cS.close();
 
@@ -196,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * CatalogSubgroupFlavors
          */
-        Log.i(Constants.LOG_TAG, "Catalog Subgroup Flavors");
+        //Log.i(Constants.LOG_TAG, "Catalog Subgroup Flavors");
 
         String[] projectionSF = {
                 CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME,
@@ -223,12 +184,13 @@ public class MainActivity extends AppCompatActivity {
         while (cSF.moveToNext()) {
             subgroupName = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME));
             subgroupFlavors = cSF.getString(cSF.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS));
-            Log.i(Constants.LOG_TAG, "Subgroup Name:    " + subgroupName);
-            Log.i(Constants.LOG_TAG, "Subgroup Flavors: " + subgroupFlavors);
+            //TODO remove Logs
+            //Log.i(Constants.LOG_TAG, "Subgroup Name:    " + subgroupName);
+            //Log.i(Constants.LOG_TAG, "Subgroup Flavors: " + subgroupFlavors);
         }
         cSF.close();
 
-        Log.i(Constants.LOG_TAG, "Database Select Test End");
+        //Log.i(Constants.LOG_TAG, "Database Select Test End");
 
 
         /**
@@ -236,24 +198,55 @@ public class MainActivity extends AppCompatActivity {
          */
 
         /**
-         * JSON Test Begin
+         * Shared preferences Test Begin
          */
-        updateCatalog();
+
+        /** Sample to be used from a fragment
+         * Context context = getActivity();
+         * SharedPreferences sharedPref = context.getSharedPreferences(
+         * getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+         */
+        SharedPreferences sharedPref = this.getSharedPreferences(
+                "br.com.brigaderiafina.brigaderiafina.#PREF", this.MODE_PRIVATE);
 
         /**
-         * JSON Test End
+         * Read
+         *
+         * SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+         * int defaultValue = getResources().getInteger(R.string.saved_high_score_default);
+         * long highScore = sharedPref.getInt(getString(R.string.saved_high_score), defaultValue);
+         */
+
+        String firstAccess = sharedPref.getString("FIRST_ACCESS", "Not found");
+
+        Log.i("testShared","Result 1: "+firstAccess);
+
+        /**
+         *  Write
+         *  SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+         * SharedPreferences.Editor editor = sharedPref.edit();
+         * editor.putInt(getString(R.string.saved_high_score), newHighScore);
+         * editor.commit();
+         */
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("FIRST_ACCESS", "Yeah!");
+        editor.commit();
+
+        firstAccess = sharedPref.getString("FIRST_ACCESS", "Not found");
+        Log.i("testShared", "Result 2: " + firstAccess);
+
+        /**
+         * Shared preferences Test End
          */
 
     }
 
+    protected void verifyCatalogVersion() {
 
-
-    protected void updateCatalog() {
-        FetchCatalogTask fetchCatalogTask = new FetchCatalogTask();
-        fetchCatalogTask.execute();
+        FetchVersionTask fetchVersionTask = new FetchVersionTask();
+        fetchVersionTask.execute(this);
     }
-
-
 
 
     @Override

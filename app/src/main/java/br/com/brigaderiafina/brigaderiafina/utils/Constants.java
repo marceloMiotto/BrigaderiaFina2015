@@ -15,6 +15,11 @@ public class Constants {
     /**
      * JSON
      */
+    public static final String AUTH_ID            = "auth_id";
+    public static final String API_KEY            = "4981bb031dc179bd13edbda08a64dd94";
+    public static final String CATALOG_BASE_URL   = "http://www.brigaderiafina.com.br/mobile/database/database.php?";
+    public static final String QUERY_PARAMETER    = "w";
+
     public static final String OWM_CATALOG        = "catalogo";
     public static final String OWM_LINES          = "linha";
     public static final String OWM_LINE_NAME      = "linha_nome";
@@ -25,4 +30,9 @@ public class Constants {
     public static final String OWM_SUBGROUP_NAME  = "subgrupo_nome";
     public static final String OWM_SUBGROUP_PRICE = "preco";
     public static final String OWM_FLAVORS        = "sabores";
+
+    public static final String OWM_MODULE_NAME    = "module_name";
+    public static final String OWM_MODULE_VERSION = "module_version";
+
+    public static final String OWM_EVENTS         = "events";
 }

@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class CatalogDbHelper extends SQLiteOpenHelper{
 
-    public static final int    DATABASE_VERSION = 2;
+    public static final int    DATABASE_VERSION = 3;
     public static final String DATABASE_NAME    = "Catalog.db";
 
     public CatalogDbHelper(Context context) {
@@ -16,18 +16,14 @@ public class CatalogDbHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CatalogSQLHelper.SQL_CREATE_CATALOG_SUBGROUPS);
-        db.execSQL(CatalogSQLHelper.SQL_CREATE_MODULE_VERSIONS);
         db.execSQL(CatalogSQLHelper.SQL_CREATE_CATALOG_SUBGROUP_FLAVORS);
+        db.execSQL(CatalogSQLHelper.SQL_CREATE_EVENTS);
 
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        /**
-         * ModuleVersion
-         */
-        db.execSQL(CatalogSQLHelper.SQL_DROP_TABLE_MODULE_VERSIONS);
         /**
          * CatalogSubgroup
          */
@@ -36,6 +32,10 @@ public class CatalogDbHelper extends SQLiteOpenHelper{
          * CatalogSubgroupFlavors
          */
         db.execSQL(CatalogSQLHelper.SQL_DROP_TABLE_CATALOG_SUBGROUP_FLAVORS);
+        /**
+         * Events
+         */
+        db.execSQL(CatalogSQLHelper.SQL_DROP_TABLE_EVENTS);
 
         onCreate(db);
 
