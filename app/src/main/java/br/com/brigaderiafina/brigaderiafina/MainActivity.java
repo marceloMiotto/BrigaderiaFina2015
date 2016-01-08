@@ -196,50 +196,6 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Database Select Test End
          */
-
-        /**
-         * Shared preferences Test Begin
-         */
-
-        /** Sample to be used from a fragment
-         * Context context = getActivity();
-         * SharedPreferences sharedPref = context.getSharedPreferences(
-         * getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-         */
-        SharedPreferences sharedPref = this.getSharedPreferences(
-                "br.com.brigaderiafina.brigaderiafina.#PREF", this.MODE_PRIVATE);
-
-        /**
-         * Read
-         *
-         * SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-         * int defaultValue = getResources().getInteger(R.string.saved_high_score_default);
-         * long highScore = sharedPref.getInt(getString(R.string.saved_high_score), defaultValue);
-         */
-
-        String firstAccess = sharedPref.getString("FIRST_ACCESS", "Not found");
-
-        Log.i("testShared","Result 1: "+firstAccess);
-
-        /**
-         *  Write
-         *  SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-         * SharedPreferences.Editor editor = sharedPref.edit();
-         * editor.putInt(getString(R.string.saved_high_score), newHighScore);
-         * editor.commit();
-         */
-
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("FIRST_ACCESS", "Yeah!");
-        editor.commit();
-
-        firstAccess = sharedPref.getString("FIRST_ACCESS", "Not found");
-        Log.i("testShared", "Result 2: " + firstAccess);
-
-        /**
-         * Shared preferences Test End
-         */
-
     }
 
     protected void verifyCatalogVersion() {

@@ -8,10 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class DetailActivityFragment extends Fragment{
+
+    int mSubgroupCount;
 
     public DetailActivityFragment() {
     }
@@ -31,13 +34,13 @@ public class DetailActivityFragment extends Fragment{
 
             @Override
             public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.text1.setText("Brigadeiros");
-                viewHolder.text2.setText("Deliciosos brigadeiros por apenas R$ 1,80.");
+                viewHolder.subgroupName.setText("Brigadeiros");
+                viewHolder.subgroupPrice.setText("R$ 1,80.");
             }
 
             @Override
             public int getItemCount() {
-                return 15;
+                return mSubgroupCount;
             }
         });
 
@@ -46,13 +49,16 @@ public class DetailActivityFragment extends Fragment{
     }
 
    private static class ViewHolder extends RecyclerView.ViewHolder {
-    TextView text1;
-    TextView text2;
+
+       ImageView subgroupPhoto;
+       TextView  subgroupName;
+       TextView  subgroupPrice;
 
     public ViewHolder(View itemView) {
         super(itemView);
-        text1 = (TextView) itemView.findViewById(android.R.id.text1);
-        text2 = (TextView) itemView.findViewById(android.R.id.text2);
+        subgroupPhoto = (ImageView) itemView.findViewById(R.id.subgroupPhotoImageView);
+        subgroupName = (TextView) itemView.findViewById(R.id.subgroupNameTextView);
+        subgroupPrice = (TextView) itemView.findViewById(R.id.subgroupPriceTextView);
     }
 }
 }

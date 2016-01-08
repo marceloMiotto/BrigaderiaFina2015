@@ -49,6 +49,8 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
                     versionJSONObject = versionJSONArray.getJSONObject(i);
                     editor.putString(versionJSONObject.getString(Constants.OWM_MODULE_NAME),versionJSONObject.getString(Constants.OWM_MODULE_VERSION ));
                     editor.commit();
+                    Log.i(Constants.LOG_TAG, "Module Name " + versionJSONObject.getString(Constants.OWM_MODULE_NAME));
+                    Log.i(Constants.LOG_TAG,"Module Version "+ versionJSONObject.getString(Constants.OWM_MODULE_VERSION));
                 }
 
             }catch (JSONException e){
@@ -65,24 +67,33 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.file_key_pref), context.MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = sharedPref.edit();
+
         //Catalog
-        String subroupModuleApp  = sharedPref.getString(context.getString(R.string.subgroup_module_version_app_pref)
+        String subgroupModuleApp  = sharedPref.getString(context.getString(R.string.subgroup_module_version_app_pref)
                 , context.getString(R.string.module_version_default_pref));
 
-        String subroupModuleServer  = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
-                , context.getString(R.string.module_version_default_pref));
+        String subgroupModuleServer  = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
+                , subgroupModuleApp);
         //Events
         String eventsModuleApp = sharedPref.getString(context.getString(R.string.events_module_version_app_pref)
                 , context.getString(R.string.module_version_default_pref));
 
         String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
-                , context.getString(R.string.module_version_default_pref));
+                ,eventsModuleApp);
 
-        if (subroupModuleApp.equals(subroupModuleServer)) {
-            updateCatalog(context,Constants.OWM_SUBGROUPS);
+        Log.i(Constants.LOG_TAG,"subgroupModuleApp: " + subgroupModuleApp );
+        Log.i(Constants.LOG_TAG,"subgroupModuleServer: " + subgroupModuleServer );
+        Log.i(Constants.LOG_TAG,"eventsModuleApp: " + eventsModuleApp );
+        Log.i(Constants.LOG_TAG,"eventsModuleServer: " + eventsModuleServer );
+
+        if (!subgroupModuleApp.equals(subgroupModuleServer)) {
+            Log.i(Constants.LOG_TAG,"update catalog start");
+            updateCatalog(context,Constants.OWM_SUBGROUP);
         }
 
-        if (eventsModuleApp.equals(eventsModuleServer)) {
+        if (!eventsModuleApp.equals(eventsModuleServer)) {
+            Log.i(Constants.LOG_TAG,"update events start" );
             updateCatalog(context,Constants.OWM_EVENTS);
         }
 
@@ -90,7 +101,9 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
     protected void updateCatalog(Context context, String type) {
 
-        FetchCatalogTask fetchCatalogTask = new FetchCatalogTask(type);
+        FetchCatalogTask fetchCatalogTask = new FetchCatalogTask(context,type);
         fetchCatalogTask.execute(context);
     }
+
+
 }
