@@ -19,7 +19,7 @@ public class History {
  *  --------------------------------   ----------   -------------------------------------------------------
  *  MainActivity                       Activity     ???
  *  MainActivityFragment               Fragment     ???
- *  ImageLinesAdapter                  Java Class   ???
+ *  LinesAdapter                  Java Class   ???
  *  Lines                              Java Class   ???
  *  DetailActivity                     Activity     ???
  *  DetailActivityFragment             Fragment     ???

@@ -10,9 +10,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import br.com.brigaderiafina.brigaderiafina.R;
 
-public class ImageLinesAdapter extends ArrayAdapter<Lines> {
+public class LinesAdapter extends ArrayAdapter<Lines> {
 
-    public ImageLinesAdapter(Context c, ArrayList<Lines> lines) {
+    public LinesAdapter(Context c, ArrayList<Lines> lines) {
         super(c,0,lines);
 
     }

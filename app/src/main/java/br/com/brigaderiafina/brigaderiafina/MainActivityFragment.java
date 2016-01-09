@@ -3,7 +3,6 @@ package br.com.brigaderiafina.brigaderiafina;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import br.com.brigaderiafina.brigaderiafina.adapters.ImageLinesAdapter;
+import br.com.brigaderiafina.brigaderiafina.adapters.LinesAdapter;
 import br.com.brigaderiafina.brigaderiafina.adapters.Lines;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
@@ -29,7 +28,7 @@ public class MainActivityFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         ArrayList<Lines> lines = Lines.getLines();
-        ImageLinesAdapter adapter = new ImageLinesAdapter(getActivity(),lines);
+        LinesAdapter adapter = new LinesAdapter(getActivity(),lines);
         ListView listView = (ListView) view.findViewById(R.id.item_main_list_view);
         listView.setAdapter(adapter);
 
