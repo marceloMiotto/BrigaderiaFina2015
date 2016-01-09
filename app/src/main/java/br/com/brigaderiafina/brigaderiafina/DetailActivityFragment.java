@@ -34,11 +34,13 @@ public class DetailActivityFragment extends Fragment{
 
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerview);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        Subgroups sub = new Subgroups();
         Intent intent = getActivity().getIntent();
+
+        Subgroups sub = new Subgroups(getActivity());
         mLineChoosen = intent.getStringExtra(Constants.LINE_NAME);
         ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
         mSubgroups = new SubgroupsAdapter(getActivity(),s);
+
         rv.setAdapter(mSubgroups);
 
         return view;
