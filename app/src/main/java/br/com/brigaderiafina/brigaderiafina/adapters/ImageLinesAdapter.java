@@ -12,8 +12,6 @@ import br.com.brigaderiafina.brigaderiafina.R;
 
 public class ImageLinesAdapter extends ArrayAdapter<Lines> {
 
-    private Context mContext;
-
     public ImageLinesAdapter(Context c, ArrayList<Lines> lines) {
         super(c,0,lines);
 
@@ -34,7 +32,5 @@ public class ImageLinesAdapter extends ArrayAdapter<Lines> {
 
         return convertView;
     }
-
-
 
 }
