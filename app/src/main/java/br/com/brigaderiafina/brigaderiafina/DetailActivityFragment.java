@@ -1,6 +1,7 @@
 package br.com.brigaderiafina.brigaderiafina;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,10 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import br.com.brigaderiafina.brigaderiafina.adapters.Subgroups;
+import br.com.brigaderiafina.brigaderiafina.adapters.SubgroupsAdapter;
+import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+
 
 public class DetailActivityFragment extends Fragment{
 
-    int mSubgroupCount;
+    SubgroupsAdapter mSubgroups;
+    String           mLineChoosen;
 
     public DetailActivityFragment() {
     }
@@ -26,40 +34,14 @@ public class DetailActivityFragment extends Fragment{
 
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerview);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rv.setAdapter(new RecyclerView.Adapter<ViewHolder>() {
-            @Override
-            public ViewHolder onCreateViewHolder(ViewGroup parent, int position) {
-                return new ViewHolder(getActivity().getLayoutInflater().inflate(R.layout.item_list_detail, parent, false));
-            }
-
-            @Override
-            public void onBindViewHolder(ViewHolder viewHolder, int position) {
-                viewHolder.subgroupName.setText("Brigadeiros");
-                viewHolder.subgroupPrice.setText("R$ 1,80.");
-            }
-
-            @Override
-            public int getItemCount() {
-                return mSubgroupCount;
-            }
-        });
-
+        Subgroups sub = new Subgroups();
+        Intent intent = getActivity().getIntent();
+        mLineChoosen = intent.getStringExtra(Constants.LINE_NAME);
+        ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
+        mSubgroups = new SubgroupsAdapter(getActivity(),s);
+        rv.setAdapter(mSubgroups);
 
         return view;
     }
-
-   private static class ViewHolder extends RecyclerView.ViewHolder {
-
-       ImageView subgroupPhoto;
-       TextView  subgroupName;
-       TextView  subgroupPrice;
-
-    public ViewHolder(View itemView) {
-        super(itemView);
-        subgroupPhoto = (ImageView) itemView.findViewById(R.id.subgroupPhotoImageView);
-        subgroupName = (TextView) itemView.findViewById(R.id.subgroupNameTextView);
-        subgroupPrice = (TextView) itemView.findViewById(R.id.subgroupPriceTextView);
-    }
-}
 }
 

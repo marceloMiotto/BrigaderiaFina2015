@@ -11,13 +11,15 @@ import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
 
 public class Subgroups {
 
-    private String subgroupName;
-    private String subgroupPrice;
-    private String subgroupPhoto;
+    public String subgroupName;
+    public String subgroupPrice;
+    public String subgroupPhoto;
     Context mContext;
 
     CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
     SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+    public Subgroups(){}
 
     public Subgroups(Context context,String subgroupName, String subgroupPrice, String subgroupPhoto){
         this.subgroupName  = subgroupName;
