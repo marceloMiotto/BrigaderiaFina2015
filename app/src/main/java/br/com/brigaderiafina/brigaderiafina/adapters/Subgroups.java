@@ -50,6 +50,7 @@ public class Subgroups {
         Log.e(Constants.LOG_TAG, "Catalog Subgroup");
 
         String[] projection = {
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME,
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME,
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE,
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO
@@ -64,32 +65,38 @@ public class Subgroups {
         Log.e(Constants.LOG_TAG, "Where Clause End");
         Log.e(Constants.LOG_TAG, "line name " + lineName);
         Cursor c = db.query(
-                CatalogContract.CatalogSubgroup.TABLE_NAME,            // The table to query
-                projection,                                            // The columns to return
-                "line=?",                                              // The columns for the WHERE clause
-                whereClauseValues,                                     // The values for the WHERE clause
-                null,                                                  // don't group the rows
-                null,                                                  // don't filter by row groups
-                sortOrder                                              // The sort order
+                CatalogContract.CatalogSubgroup.TABLE_NAME,                  // The table to query
+                projection,                                                  // The columns to return
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME+"=?",  // The columns for the WHERE clause
+                whereClauseValues,                                           // The values for the WHERE clause
+                null,                                                        // don't group the rows
+                null,                                                        // don't filter by row groups
+                sortOrder                                                    // The sort order
         );
 
         Log.e(Constants.LOG_TAG, "Move to first");
-        c.moveToFirst();
-        Log.e(Constants.LOG_TAG, "Start Loop");
-        while (c.moveToNext()) {
-            subgroupName = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
-            subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
-            subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
+        if(c.getCount()!=0){
 
-            Log.e(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
-            Log.e(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
-            Log.e(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
+            c.moveToFirst();
+            if(c.isBeforeFirst()){
+                c.moveToNext();
+            }
+            Log.e(Constants.LOG_TAG, "Start Loop");
+            do{
 
-            subgroups.add(new Subgroups(subgroupName,subgroupPrice,subgroupPhoto));
+                subgroupName = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
+                subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
+                subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
+
+                Log.e(Constants.LOG_TAG,"Line "+c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME)));
+                Log.e(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
+                Log.e(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
+                Log.e(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
+
+                subgroups.add(new Subgroups(subgroupName, subgroupPrice, subgroupPhoto));
+            }while (c.moveToNext());
         }
         c.close();
-
-
 
         return subgroups;
     }

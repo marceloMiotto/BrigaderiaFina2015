@@ -10,7 +10,7 @@ public class Constants {
     public static final String CAKE_LINE     = "Linha Cake";
     public static final String EVENT_LINE    = "Eventos";
     public static final String LINE_NAME     = "LINE NAME";
-    public static final String LOG_TAG       = "Debug APP";
+    public static final String LOG_TAG       = "DebugAPP";
 
     /**
      * JSON

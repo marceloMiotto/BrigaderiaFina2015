@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
 
         <ImageView
@@ -18,19 +19,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
+            android:layout_alignParentLeft="true"
             />
 
         <TextView
             android:id="@+id/subgroupNameTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            />
 
         <TextView
             android:id="@+id/subgroupPriceTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            />
     </LinearLayout>
 
 </LinearLayout>
