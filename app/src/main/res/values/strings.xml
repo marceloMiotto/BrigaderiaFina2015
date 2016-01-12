@@ -13,4 +13,8 @@
     <string name="events_module_version_server_pref">events</string>
     <string name="module_version_default_pref">1</string>
     <string name="first_access_pref">first_access</string>
+    <string name="title_activity_subgroup_detail">SubgroupDetailActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

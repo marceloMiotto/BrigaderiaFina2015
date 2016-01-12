@@ -37,4 +37,9 @@ public class Constants {
     public static final String OWM_EVENTS         = "events";
     public static final String OWM_SUBGROUP       = "subgroup";
     public static final String OWM_TYPE           = "type";
+
+    /**
+     * Subgroup Details
+     */
+    public static final String SUBGROUP_DETAILS   = "subgroup_details";
 }

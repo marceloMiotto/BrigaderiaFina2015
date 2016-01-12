@@ -3,26 +3,22 @@ package br.com.brigaderiafina.brigaderiafina;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.adapters.Subgroups;
-import br.com.brigaderiafina.brigaderiafina.adapters.SubgroupsAdapter;
+import br.com.brigaderiafina.brigaderiafina.adapters.subgroupsAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 
 public class DetailActivityFragment extends Fragment{
 
-    SubgroupsAdapter mSubgroups;
-    String           mLineChoosen;
+    subgroupsAdapter mSubgroups;
+    String                      mLineChoosen;
 
     public DetailActivityFragment() {
     }
@@ -39,7 +35,7 @@ public class DetailActivityFragment extends Fragment{
         Subgroups sub = new Subgroups(getActivity());
         mLineChoosen = intent.getStringExtra(Constants.LINE_NAME);
         ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
-        mSubgroups = new SubgroupsAdapter(getActivity(),s);
+        mSubgroups = new subgroupsAdapter(getActivity(),s);
 
         rv.setAdapter(mSubgroups);
 

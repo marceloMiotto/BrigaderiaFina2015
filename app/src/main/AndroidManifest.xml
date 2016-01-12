@@ -23,10 +23,18 @@
             android:name=".DetailActivity"
             android:label="@string/title_activity_detail"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="br.com.brigaderiafina.brigaderiafina.MainActivity" />
+        </activity>
+        <activity
+            android:name=".SubgroupDetailActivity"
+            android:parentActivityName=".DetailActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="br.com.brigaderiafina.brigaderiafina.DetailActivity" />
         </activity>
     </application>
 

@@ -11,5 +11,6 @@
     <dimen name="SecondaryElevation">8dp</dimen>
     <dimen name="ThirdElevation">12dp</dimen>
     <dimen name="activity_top_margin">64dp</dimen>
+    <dimen name="item_list_detail_padding">8dp</dimen>
 
 </resources>
