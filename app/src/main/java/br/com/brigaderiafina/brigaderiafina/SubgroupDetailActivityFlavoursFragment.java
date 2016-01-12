@@ -28,20 +28,28 @@ public class SubgroupDetailActivityFlavoursFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_subgroup_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_subgroup_flavour_detail, container, false);
 
-        RecyclerView rv = (RecyclerView) view.findViewById(R.id.subgroup_flavours_recyclerview);
+        RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerviewFlavours);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Intent intent = getActivity().getIntent();
 
         Flavours fla = new Flavours(getActivity());
         mSubgroupChoosen = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
         ArrayList<Flavours> f = fla.getFlavors(mSubgroupChoosen);
+        //test
+        Flavours fa = new Flavours(getActivity());
+        for(int i=0;i<f.size();i++){
+            fa = f.get(i);
+            Log.i(Constants.LOG_TAG, "Flavours debug " + fa.flavours);
+        }
+        //
         mFlavours = new FlavoursAdapter(getActivity(),f);
         //TODO remove this If part
         if(mFlavours !=null){
             Log.i(Constants.LOG_TAG,"Ok exists..");
         }
+
         rv.setAdapter(mFlavours);
 
         return view;

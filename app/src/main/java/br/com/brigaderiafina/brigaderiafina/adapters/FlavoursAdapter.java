@@ -13,7 +13,7 @@ import br.com.brigaderiafina.brigaderiafina.R;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 import br.com.brigaderiafina.brigaderiafina.utils.Util;
 
-public class FlavoursAdapter extends RecyclerView.Adapter<FlavoursAdapter.CustomViewHolder> {
+public class FlavoursAdapter extends  RecyclerView.Adapter<FlavoursAdapter.CustomViewHolder>{
 
     private List<Flavours> flavoursList;
     private Context mContext;
@@ -21,6 +21,12 @@ public class FlavoursAdapter extends RecyclerView.Adapter<FlavoursAdapter.Custom
 
     public FlavoursAdapter(Context context, List<Flavours> flavoursList) {
         this.flavoursList = flavoursList;
+        //test
+        Flavours fa = new Flavours(context);
+        for(int i=0;i<this.flavoursList.size();i++){
+            fa = this.flavoursList.get(i);
+            Log.i(Constants.LOG_TAG,"Flavours2 (adapater) debug "+ fa.flavours );
+        }
         this.mContext = context;
 
     }
@@ -36,8 +42,12 @@ public class FlavoursAdapter extends RecyclerView.Adapter<FlavoursAdapter.Custom
     @Override
     public void onBindViewHolder(CustomViewHolder viewHolder, int position) {
 
+        Log.i(Constants.LOG_TAG,"ok flavour position: "+position);
         Flavours fav = flavoursList.get(position);
-        viewHolder.subgroupFlavour.setText(fav.subgroupFlavour);
+
+        Log.i(Constants.LOG_TAG,"ok flavour: "+fav.flavours);
+
+        viewHolder.subgroupFlavour.setText(fav.flavours);
     }
 
     @Override

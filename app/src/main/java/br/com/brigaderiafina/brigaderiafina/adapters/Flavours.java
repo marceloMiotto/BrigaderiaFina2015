@@ -14,7 +14,7 @@ import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 public class Flavours {
 
-    String  flavours;
+    public String  flavours;
     Context mContext;
     String  subgroupFlavour;
 
@@ -27,7 +27,7 @@ public class Flavours {
 
     public ArrayList<Flavours> getFlavors(String subgroupName){
 
-        ArrayList<Flavours> flavours = new ArrayList<Flavours>();
+        ArrayList<Flavours> flavoursArrayList = new ArrayList<Flavours>();
 
         if(mContext != null){
             Log.e(Constants.LOG_TAG, "Context up!");
@@ -80,11 +80,12 @@ public class Flavours {
 
                 Log.e(Constants.LOG_TAG, "Subgroup Flavour: " + subgroupFlavour);
 
-                flavours.add(new Flavours(subgroupFlavour));
+                flavoursArrayList.add(new Flavours(subgroupFlavour));
+
             }while (c.moveToNext());
         }
         c.close();
 
-        return flavours;
+        return flavoursArrayList;
     }
 }

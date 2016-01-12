@@ -25,11 +25,11 @@ public class SubgroupDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subgroup_detail);
 
-       // toolbar = (Toolbar) findViewById(R.id.ToolBarId);
-       // setSupportActionBar(toolbar);
-       // Intent intent = getIntent();
-       // String subgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
-      //  toolbar.setTitle(subgroupName);
+        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+        Intent intent = getIntent();
+        String subgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
+        toolbar.setTitle(subgroupName);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
