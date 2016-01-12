@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.adapters.Subgroups;
-import br.com.brigaderiafina.brigaderiafina.adapters.subgroupsAdapter;
+import br.com.brigaderiafina.brigaderiafina.adapters.SubgroupsAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 
 public class DetailActivityFragment extends Fragment{
 
-    subgroupsAdapter mSubgroups;
+    SubgroupsAdapter mSubgroups;
     String                      mLineChoosen;
 
     public DetailActivityFragment() {
@@ -35,7 +35,7 @@ public class DetailActivityFragment extends Fragment{
         Subgroups sub = new Subgroups(getActivity());
         mLineChoosen = intent.getStringExtra(Constants.LINE_NAME);
         ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
-        mSubgroups = new subgroupsAdapter(getActivity(),s);
+        mSubgroups = new SubgroupsAdapter(getActivity(),s);
 
         rv.setAdapter(mSubgroups);
 

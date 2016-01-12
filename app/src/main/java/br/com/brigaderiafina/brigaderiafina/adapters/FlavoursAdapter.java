@@ -11,13 +11,13 @@ import android.widget.TextView;
 import java.util.List;
 import br.com.brigaderiafina.brigaderiafina.R;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
-import br.com.brigaderiafina.brigaderiafina.utils.util;
+import br.com.brigaderiafina.brigaderiafina.utils.Util;
 
 public class FlavoursAdapter extends RecyclerView.Adapter<FlavoursAdapter.CustomViewHolder> {
 
     private List<Flavours> flavoursList;
     private Context mContext;
-    private util mUtil = new util();
+    private Util mUtil = new Util();
 
     public FlavoursAdapter(Context context, List<Flavours> flavoursList) {
         this.flavoursList = flavoursList;
