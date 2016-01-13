@@ -43,12 +43,8 @@ public class SubgroupDetailActivityFlavoursFragment extends Fragment {
             fa = f.get(i);
             Log.i(Constants.LOG_TAG, "Flavours debug " + fa.flavours);
         }
-        //
+
         mFlavours = new FlavoursAdapter(getActivity(),f);
-        //TODO remove this If part
-        if(mFlavours !=null){
-            Log.i(Constants.LOG_TAG,"Ok exists..");
-        }
 
         rv.setAdapter(mFlavours);
 

@@ -27,7 +27,6 @@ public class DetailActivityFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
-
         RecyclerView rv = (RecyclerView) view.findViewById(R.id.recyclerview);
         rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         Intent intent = getActivity().getIntent();

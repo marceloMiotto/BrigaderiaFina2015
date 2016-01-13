@@ -42,4 +42,10 @@ public class Constants {
      * Subgroup Details
      */
     public static final String SUBGROUP_DETAILS   = "subgroup_details";
+
+    /**
+     * Tab Names
+     */
+    public static final String TAB_FLAVOUR = "Sabores";
+    public static final String TAB_PHOTO   = "Fotos";
 }

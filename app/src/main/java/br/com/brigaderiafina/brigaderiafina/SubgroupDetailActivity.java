@@ -34,33 +34,24 @@ public class SubgroupDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subgroup_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.app_bar);
+        toolbar = (Toolbar) findViewById(R.id.appbarSubgroup);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         String subgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
-        toolbar.setTitle(subgroupName);
+        getSupportActionBar().setTitle(subgroupName);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        /*
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        SubgroupDetailActivityFlavoursFragment fragment = new SubgroupDetailActivityFlavoursFragment();
-        fragmentTransaction.add(R.id.subgroup_detail_fragment_container, fragment, SUBGROUP_FLAVOURS);
-        fragmentTransaction.commit();
-        */
-    Log.i(Constants.LOG_TAG,"Ok.. call activiy with subgroup");
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SubgroupDetailActivityFlavoursFragment(), "Sabores");
-        adapter.addFragment(new SubgroupDetailActivityPhotosFragment(), "Fotos");
+        adapter.addFragment(new SubgroupDetailActivityFlavoursFragment(),Constants.TAB_FLAVOUR );
+        adapter.addFragment(new SubgroupDetailActivityPhotosFragment(), Constants.TAB_PHOTO);
         viewPager.setAdapter(adapter);
     }
 
