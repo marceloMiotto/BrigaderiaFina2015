@@ -2,11 +2,16 @@ package br.com.brigaderiafina.brigaderiafina;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+
 
 public class SubgroupDetailActivityPhotosFragment extends Fragment {
 
@@ -16,33 +21,54 @@ public class SubgroupDetailActivityPhotosFragment extends Fragment {
         // Required empty public constructor
     }
 
+    /**
+     * The number of pages (wizard steps) to show in this demo.
+     */
+    private static final int NUM_PAGES = 5;
+
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+                                Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.subgroup_screen_slide, container, false);
+       // setContentView(R.layout.subgroup_screen_slide);
 
-        View view = inflater.inflate(R.layout.fragment_subgroup_detail_photos, container, false);
-        LinearLayout imageGallery = (LinearLayout) view.findViewById(R.id.imageGallery);
-        for (Integer image : images) {
-            imageGallery.addView(getImageView(image));
-        }
-        //addImagesToThegallery();
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) view.findViewById(R.id.pager);
+        mPagerAdapter = new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
 
         return view;
-
     }
 
-    private View getImageView(Integer image) {
-        ImageView imageView = new ImageView(getActivity());
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-       // lp.setMargins(0, 0, 10, 0);
-        imageView.setLayoutParams(lp);
-        imageView.setImageResource(image);
-        return imageView;
+
+    /**
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
+     */
+    private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return new ScreenSlidePageFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return NUM_PAGES;
+        }
     }
 }
-
-
-
-
