@@ -64,10 +64,12 @@ public class MainActivityFragment extends Fragment {
                         break;
                 }
 
+
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra(Constants.LINE_NAME, lineChoosen);
                 //Log.i(Constants.LOG_TAG, "Line Name " + lineChoosen + position);
                 startActivity(intent);
+
             }
         });
 
