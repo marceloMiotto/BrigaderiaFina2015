@@ -15,12 +15,12 @@ import br.com.brigaderiafina.brigaderiafina.adapters.Flavours;
 import br.com.brigaderiafina.brigaderiafina.adapters.FlavoursAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
-public class SubgroupDetailActivityFlavoursFragment extends Fragment {
+public class TabPageActivityDescriptionFragment extends Fragment {
 
     String mSubgroupChoosen;
     FlavoursAdapter mFlavours;
 
-    public SubgroupDetailActivityFlavoursFragment() {
+    public TabPageActivityDescriptionFragment() {
         // Required empty public constructor
     }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.brigaderiafina.brigaderiafina.R;
-import br.com.brigaderiafina.brigaderiafina.SubgroupDetailActivity;
+import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 import br.com.brigaderiafina.brigaderiafina.utils.Util;
 
@@ -72,7 +72,7 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
             int position = getAdapterPosition();
             //Toast.makeText(mContext,"Test position "+position,Toast.LENGTH_SHORT).show();
             Subgroups sub = subgroupsList.get(position);
-            Intent intent = new Intent(mContext, SubgroupDetailActivity.class);
+            Intent intent = new Intent(mContext, TabPageActivity.class);
             intent.putExtra(Constants.SUBGROUP_DETAILS,sub.subgroupName);
             mContext.startActivity(intent);
 

@@ -1,5 +1,7 @@
 package br.com.brigaderiafina.brigaderiafina.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,17 +12,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.R;
+import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
+import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
-public class EventsAdapter extends RecyclerView
-        .Adapter<EventsAdapter
-        .DataObjectHolder> {
+public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObjectHolder> {
+
     private static String LOG_TAG = "EventsAdapter";
     private ArrayList<Events> mEvents;
-    private static EventsClickListener eventsClickListener;
+    private Context mContext;
 
-    public static class DataObjectHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
+    public class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView label;
         TextView dateTime;
 
@@ -34,15 +35,20 @@ public class EventsAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            eventsClickListener.onItemClick(getAdapterPosition(), v);
+            int position = getAdapterPosition();
+//            eventsClickListener.onItemClick(getAdapterPosition(), v);
+            Log.i(Constants.LOG_TAG,"onClick debug1");
+            Log.i(Constants.LOG_TAG,"Adpater Position "+getAdapterPosition());
+
+            Events evs = mEvents.get(position);
+            Intent intent = new Intent(mContext, TabPageActivity.class);
+            intent.putExtra(Constants.SUBGROUP_DETAILS, evs.getmText1());
+            mContext.startActivity(intent);
         }
     }
 
-    public void setOnItemClickListener(EventsClickListener eventsClickListener) {
-        this.eventsClickListener = eventsClickListener;
-    }
-
-    public EventsAdapter(ArrayList<Events> myDataset) {
+    public EventsAdapter(Context context,ArrayList<Events> myDataset) {
+        mContext = context;
         mEvents = myDataset;
     }
 
@@ -74,10 +80,8 @@ public class EventsAdapter extends RecyclerView
 
     @Override
     public int getItemCount() {
+
         return mEvents.size();
     }
 
-    public interface EventsClickListener {
-        public void onItemClick(int position, View v);
-    }
 }

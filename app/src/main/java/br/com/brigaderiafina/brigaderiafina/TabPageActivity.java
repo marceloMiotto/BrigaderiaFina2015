@@ -13,7 +13,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -22,11 +21,12 @@ import java.util.List;
 
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
-public class SubgroupDetailActivity extends AppCompatActivity {
+public class TabPageActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private String mSubgroupName;//test
 
     private static String SUBGROUP_FLAVOURS = "subgrupoDetailFlavoursFragment";
     @Override
@@ -38,8 +38,8 @@ public class SubgroupDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
-        String subgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
-        getSupportActionBar().setTitle(subgroupName);
+        mSubgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
+        getSupportActionBar().setTitle(mSubgroupName);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -50,8 +50,16 @@ public class SubgroupDetailActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new SubgroupDetailActivityFlavoursFragment(),Constants.TAB_FLAVOUR );
-        adapter.addFragment(new SubgroupDetailActivityPhotosFragment(), Constants.TAB_PHOTO);
+        //Test
+        if (mSubgroupName.contains("Evento")) {
+            adapter.addFragment(new TabPageActivityPhotosFragment(), Constants.TAB_PHOTO);
+            adapter.addFragment(new TabPageActivityDescriptionFragment(),"Descrição" );
+
+        }else{
+            adapter.addFragment(new TabPageActivityDescriptionFragment(),Constants.TAB_FLAVOUR );
+            adapter.addFragment(new TabPageActivityPhotosFragment(), Constants.TAB_PHOTO);
+        }
+
         viewPager.setAdapter(adapter);
     }
 

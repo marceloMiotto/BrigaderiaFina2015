@@ -39,9 +39,8 @@ public class DetailActivityFragment extends Fragment{
             //Card View
             Log.i(Constants.LOG_TAG, "Card View 01");
             rv.setHasFixedSize(true);
-            mAdapter = new EventsAdapter(getDataSet());
+            mAdapter = new EventsAdapter(getActivity(),getDataSet());
             rv.setAdapter(mAdapter);
-
 
         }else{
             Subgroups sub = new Subgroups(getActivity());

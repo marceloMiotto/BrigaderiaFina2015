@@ -29,7 +29,7 @@
                 android:value="br.com.brigaderiafina.brigaderiafina.MainActivity" />
         </activity>
         <activity
-            android:name=".SubgroupDetailActivity"
+            android:name=".TabPageActivity"
             android:parentActivityName=".DetailActivity"
             android:screenOrientation="portrait" >
             <meta-data

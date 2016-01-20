@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 
 
 
-public class SubgroupDetailActivityPhotosFragment extends Fragment {
+public class TabPageActivityPhotosFragment extends Fragment {
 
     private Integer images[] = {R.drawable.linha_cake, R.drawable.linha_chocolat, R.drawable.linha_dessert};
 
-    public SubgroupDetailActivityPhotosFragment() {
+    public TabPageActivityPhotosFragment() {
         // Required empty public constructor
     }
 
