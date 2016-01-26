@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+import br.com.brigaderiafina.brigaderiafina.utils.MenuHandler;
 
 public class TabPageActivity extends AppCompatActivity {
 
@@ -36,7 +37,6 @@ public class TabPageActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.appbarSubgroup);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         mSubgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
         getSupportActionBar().setTitle(mSubgroupName);
@@ -95,7 +95,7 @@ public class TabPageActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_subgroup_detail, menu);
+        getMenuInflater().inflate(R.menu.global_menu, menu);
         return true;
     }
 
@@ -106,10 +106,8 @@ public class TabPageActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        MenuHandler menuHandler = new MenuHandler(this,id);
+        menuHandler.getActionMenuHandler();
 
         return super.onOptionsItemSelected(item);
     }

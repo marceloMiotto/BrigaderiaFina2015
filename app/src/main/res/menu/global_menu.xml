@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="br.com.brigaderiafina.brigaderiafina.MainActivity">
+
+    <item android:id="@+id/action_contact"
+          android:title="@string/action_contact"
+          android:orderInCategory="100"
+          app:showAsAction="never" />
+
+
+    <item android:id="@+id/action_order"
+          android:title="@string/action_order"
+          android:orderInCategory="110"
+          app:showAsAction="never" />
+
+
+    <item android:id="@+id/action_suggestion"
+          android:title="@string/action_suggestion"
+          android:orderInCategory="120"
+          app:showAsAction="never" />
+</menu>

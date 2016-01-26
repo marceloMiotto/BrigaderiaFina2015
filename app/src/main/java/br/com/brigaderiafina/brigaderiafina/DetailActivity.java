@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+import br.com.brigaderiafina.brigaderiafina.utils.MenuHandler;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -69,7 +70,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        getMenuInflater().inflate(R.menu.global_menu, menu);
         return true;
     }
 
@@ -80,10 +81,8 @@ public class DetailActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        MenuHandler menuHandler = new MenuHandler(this,id);
+        menuHandler.getActionMenuHandler();
 
         return super.onOptionsItemSelected(item);
     }

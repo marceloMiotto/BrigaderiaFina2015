@@ -1,10 +1,16 @@
 <resources>
+    <!--menu -->
+    <string name="action_contact">Contato</string>
+    <string name="action_order">Informação Pedido</string>
+    <string name="action_suggestion">Sugestões</string>
+
     <string name="app_name">Brigaderia Fina</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">Brigaderia Fina</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_detail_activity_fragment">DetailActivityFragment</string>
+
     <!--shared preferences -->
     <string name="file_key_pref">br.com.brigaderiafina.brigaderiafina.#PREF</string>
     <string name="subgroup_module_version_app_pref">subgroupApp</string>
@@ -22,4 +28,5 @@
     <string name="tab_flavour">Sabores</string>
     <string name="tab_photo">Fotos</string>
     <string name="title_activity_card_view">CardViewActivity</string>
+    <string name="title_activity_menu_info">MenuInfoActivity</string>
 </resources>

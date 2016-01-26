@@ -30,11 +30,11 @@
         </activity>
         <activity
             android:name=".TabPageActivity"
-            android:parentActivityName=".DetailActivity"
             android:screenOrientation="portrait" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="br.com.brigaderiafina.brigaderiafina.DetailActivity" />
+        </activity>
+        <activity
+            android:name=".MenuInfoActivity"
+            android:label="@string/title_activity_menu_info" >
         </activity>
     </application>
 
