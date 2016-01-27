@@ -1,36 +1,36 @@
 package br.com.brigaderiafina.brigaderiafina;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import br.com.brigaderiafina.brigaderiafina.adapters.EventsAdapter;
 import br.com.brigaderiafina.brigaderiafina.adapters.MenuInfo;
 import br.com.brigaderiafina.brigaderiafina.adapters.MenuInfoAdapter;
-import br.com.brigaderiafina.brigaderiafina.adapters.Subgroups;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
-import br.com.brigaderiafina.brigaderiafina.utils.MenuHandler;
 
 public class MenuInfoActivity extends AppCompatActivity {
 
-    private RecyclerView.Adapter mAdapter;
+    private MenuInfoAdapter mAdapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_info);
+        setContentView(R.layout.menu_info_group);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.menu_info_recyclerview);
-        rv.setHasFixedSize(true);
+        toolbar = (Toolbar) findViewById(R.id.appbarMenuInfo);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        ListView rv = (ListView) findViewById(R.id.menu_info_list_view);
         MenuInfo menuInfo = new MenuInfo();
-        ArrayList<MenuInfo> m = menuInfo.getMenuInfo();
+        ArrayList<MenuInfo> m = menuInfo.getMenuInfo(getIntent().getIntExtra(Constants.MENU_INFO_ID,-1));
         mAdapter = new MenuInfoAdapter(this,m);
         rv.setAdapter(mAdapter);
 
@@ -38,21 +38,11 @@ public class MenuInfoActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.global_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        MenuHandler menuHandler = new MenuHandler(this,id);
-        menuHandler.getActionMenuHandler();
-
         return super.onOptionsItemSelected(item);
     }
 }
