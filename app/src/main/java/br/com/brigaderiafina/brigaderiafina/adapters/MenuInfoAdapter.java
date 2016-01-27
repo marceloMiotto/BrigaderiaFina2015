@@ -30,6 +30,7 @@ public class MenuInfoAdapter extends ArrayAdapter<MenuInfo> {
 
         menuInfoTextView.setText(menuInfo.mMenuInfo);
 
+
         return convertView;
     }
 }

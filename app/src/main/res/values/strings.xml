@@ -28,5 +28,5 @@
     <string name="tab_flavour">Sabores</string>
     <string name="tab_photo">Fotos</string>
     <string name="title_activity_card_view">CardViewActivity</string>
-    <string name="title_activity_menu_info">MenuInfoActivity</string>
+    <string name="title_activity_menu_info">Informações Gerais</string>
 </resources>

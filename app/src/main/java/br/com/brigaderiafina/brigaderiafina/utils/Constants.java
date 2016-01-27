@@ -48,4 +48,9 @@ public class Constants {
      */
     public static final String TAB_FLAVOUR = "Sabores";
     public static final String TAB_PHOTO   = "Fotos";
+
+    /**
+     * Menu Info
+     */
+    public static final String MENU_INFO_ID = "menu_info_id";
 }
