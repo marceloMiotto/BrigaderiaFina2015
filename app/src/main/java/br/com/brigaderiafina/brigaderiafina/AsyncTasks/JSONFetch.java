@@ -34,7 +34,6 @@ public class JSONFetch {
                     .appendQueryParameter(Constants.QUERY_PARAMETER, queryParameter)
                     .build();
 
-            Log.i(Constants.LOG_TAG, builtUri.toString());
 
             URL url = new URL(builtUri.toString());
 
@@ -45,7 +44,6 @@ public class JSONFetch {
             InputStream inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
             if (inputStream == null) {
-                Log.i(Constants.LOG_TAG, "Buffer empty");
                 return null;
             }
             reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -53,18 +51,15 @@ public class JSONFetch {
             String line;
             while ((line = reader.readLine()) != null) {
                 buffer.append(line + "\n");
-                Log.i(Constants.LOG_TAG, "Append new line");
-                Log.i(Constants.LOG_TAG, line);
             }
 
             if (buffer.length() == 0) {
                 return null;
             }
             catalogJsonStr = buffer.toString();
-            Log.i(Constants.LOG_TAG,catalogJsonStr);
+
 
         }catch (IOException e){
-            Log.e(Constants.LOG_TAG, "Error ", e);
             return null;
         }finally {
             if (urlConnection != null) {

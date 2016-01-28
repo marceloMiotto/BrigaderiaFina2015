@@ -36,8 +36,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
     @Override
     protected JSONObject doInBackground(Context... context) {
-        Log.i("Debug x", "doInBackground()");
-        Log.i(Constants.LOG_TAG, "Do in background");
 
         JSONFetch jsonFetch = new JSONFetch();
 
@@ -54,17 +52,13 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         String     resultType;
 
-        Log.i(Constants.LOG_TAG, "onPostExecute start");
         try {
 
             resultType = catalogJson.getString(Constants.OWM_TYPE);
-            Log.i(Constants.LOG_TAG,"resultType: "+resultType);
 
             if(resultType.equals(Constants.OWM_SUBGROUP)){
-                Log.i(Constants.LOG_TAG,"Subgroup update");
                 updateCatalogDB(catalogJson);
             }else{
-                Log.i(Constants.LOG_TAG,"Events update");
                 updateEventsDB();
             }
 
@@ -76,7 +70,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
     protected void updateSharedPref(Context context){
 
-        Log.i(Constants.LOG_TAG,"update shared pref start");
+
         SharedPreferences sharedPref = context.getSharedPreferences(
                 context.getString(R.string.file_key_pref), context.MODE_PRIVATE);
 
@@ -155,9 +149,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                         subgroupPrice      = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PRICE);
                         subgroupPhoto      =  subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PHOTO);
 
-                        Log.d(Constants.LOG_TAG, "Subgroup Name: " + subgroupJSONObject.getString(Constants.OWM_SUBGROUP_NAME));
-                        Log.d(Constants.LOG_TAG, "Subgroup Price: " + subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PRICE));
-
                         /**
                          * Insert Subgroup
                          */
@@ -182,8 +173,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                         subFlavorJSONArray = subgroupJSONObject.getJSONArray(Constants.OWM_FLAVORS);
 
                         for (int n = 0; n < subFlavorJSONArray.length(); n++) {
-
-                            Log.d(Constants.LOG_TAG, "Flavors: " + subFlavorJSONArray.getString(n));
 
                             subgroupFlavors = subFlavorJSONArray.getString(n);
 

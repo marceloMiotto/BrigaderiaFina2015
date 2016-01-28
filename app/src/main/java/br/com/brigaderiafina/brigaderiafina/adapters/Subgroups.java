@@ -41,9 +41,6 @@ public class Subgroups {
 
         ArrayList<Subgroups> subgroups = new ArrayList<Subgroups>();
 
-        Log.e(Constants.LOG_TAG, "Database Select Test Begin");
-
-
         /**
          * CatalogSubgroup
          */
@@ -59,11 +56,8 @@ public class Subgroups {
         String sortOrder =
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME + " DESC";
 
-        Log.e(Constants.LOG_TAG, "Where Clause Begin");
         String[] whereClauseValues = {lineName};
 
-        Log.e(Constants.LOG_TAG, "Where Clause End");
-        Log.e(Constants.LOG_TAG, "line name " + lineName);
         Cursor c = db.query(
                 CatalogContract.CatalogSubgroup.TABLE_NAME,                  // The table to query
                 projection,                                                  // The columns to return
@@ -74,25 +68,19 @@ public class Subgroups {
                 sortOrder                                                    // The sort order
         );
 
-        Log.e(Constants.LOG_TAG, "Move to first");
+
         if(c.getCount()!=0){
 
             c.moveToFirst();
             if(c.isBeforeFirst()){
                 c.moveToNext();
             }
-            Log.e(Constants.LOG_TAG, "Start Loop");
+
             do{
 
                 subgroupName = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
                 subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
                 subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
-
-                Log.e(Constants.LOG_TAG,"Line "+c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME)));
-                Log.e(Constants.LOG_TAG, "Subgroup Name:  " + subgroupName);
-                Log.e(Constants.LOG_TAG, "Subgroup Price: " + subgroupPrice);
-                Log.e(Constants.LOG_TAG, "Subgroup Photo: " + subgroupPhoto);
-
                 subgroups.add(new Subgroups(subgroupName, subgroupPrice, subgroupPhoto));
             }while (c.moveToNext());
         }

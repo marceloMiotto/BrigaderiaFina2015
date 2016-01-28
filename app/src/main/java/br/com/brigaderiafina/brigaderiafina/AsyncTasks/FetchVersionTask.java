@@ -32,10 +32,6 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        Log.i("Debug x", "doInBackground()");
-        Log.i(Constants.LOG_TAG, "Do in background");
-
-
         JSONFetch jsonFetch = new JSONFetch();
         JSONObject jsonObject = jsonFetch.pullJSONData("catalog_versions");
         try {
@@ -49,8 +45,7 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
                     versionJSONObject = versionJSONArray.getJSONObject(i);
                     editor.putString(versionJSONObject.getString(Constants.OWM_MODULE_NAME),versionJSONObject.getString(Constants.OWM_MODULE_VERSION ));
                     editor.commit();
-                    Log.i(Constants.LOG_TAG, "Module Name " + versionJSONObject.getString(Constants.OWM_MODULE_NAME));
-                    Log.i(Constants.LOG_TAG,"Module Version "+ versionJSONObject.getString(Constants.OWM_MODULE_VERSION));
+
                 }
 
             }catch (JSONException e){
@@ -82,18 +77,13 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
         String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
                 ,eventsModuleApp);
 
-        Log.i(Constants.LOG_TAG,"subgroupModuleApp: " + subgroupModuleApp );
-        Log.i(Constants.LOG_TAG,"subgroupModuleServer: " + subgroupModuleServer );
-        Log.i(Constants.LOG_TAG,"eventsModuleApp: " + eventsModuleApp );
-        Log.i(Constants.LOG_TAG,"eventsModuleServer: " + eventsModuleServer );
+
 
         if (!subgroupModuleApp.equals(subgroupModuleServer)) {
-            Log.i(Constants.LOG_TAG,"update catalog start");
             updateCatalog(context,Constants.OWM_SUBGROUP);
         }
 
         if (!eventsModuleApp.equals(eventsModuleServer)) {
-            Log.i(Constants.LOG_TAG,"update events start" );
             updateCatalog(context,Constants.OWM_EVENTS);
         }
 

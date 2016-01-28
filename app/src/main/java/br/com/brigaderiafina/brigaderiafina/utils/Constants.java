@@ -52,5 +52,6 @@ public class Constants {
     /**
      * Menu Info
      */
-    public static final String MENU_INFO_ID = "menu_info_id";
+    public static final String MENU_INFO_ID    = "menu_info_id";
+    public static final String MENU_INFO_ARRAY = "menu_info_array";
 }

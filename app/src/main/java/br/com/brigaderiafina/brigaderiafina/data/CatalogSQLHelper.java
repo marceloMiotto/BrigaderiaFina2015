@@ -4,7 +4,6 @@ public class CatalogSQLHelper {
 
     private static final String TEXT_TYPE  = " TEXT";
     private static final String COMMA_SEP  = ",";
-    public  static final int    TABLES_QTY = 3;
 
     /**
      * CatalogSubgroup

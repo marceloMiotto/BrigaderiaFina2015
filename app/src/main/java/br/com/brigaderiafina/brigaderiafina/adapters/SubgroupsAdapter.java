@@ -70,7 +70,6 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
         @Override
         public void onClick(View v) {
             int position = getAdapterPosition();
-            //Toast.makeText(mContext,"Test position "+position,Toast.LENGTH_SHORT).show();
             Subgroups sub = subgroupsList.get(position);
             Intent intent = new Intent(mContext, TabPageActivity.class);
             intent.putExtra(Constants.SUBGROUP_DETAILS,sub.subgroupName);

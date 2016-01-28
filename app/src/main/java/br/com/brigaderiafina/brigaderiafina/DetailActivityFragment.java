@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.adapters.Events;
@@ -37,7 +37,6 @@ public class DetailActivityFragment extends Fragment{
         mLineChoosen = intent.getStringExtra(Constants.LINE_NAME);
         if(mLineChoosen.equals(Constants.EVENT_LINE)){
             //Card View
-            Log.i(Constants.LOG_TAG, "Card View 01");
             rv.setHasFixedSize(true);
             mAdapter = new EventsAdapter(getActivity(),getDataSet());
             rv.setAdapter(mAdapter);

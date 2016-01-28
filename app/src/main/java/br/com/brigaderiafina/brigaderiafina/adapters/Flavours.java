@@ -35,14 +35,9 @@ public class Flavours {
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-
-        Log.e(Constants.LOG_TAG, "Database Select Test Begin");
-
-
         /**
          * CatalogSubgroupFlavours
          */
-        Log.e(Constants.LOG_TAG, "Catalog Subgroup Flavours");
 
         String[] projection = {
                 CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME,
@@ -52,11 +47,10 @@ public class Flavours {
         String sortOrder =
                 CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS + " DESC";
 
-        Log.e(Constants.LOG_TAG, "Where Clause Begin");
+
         String[] whereClauseValues = {subgroupName};
 
-        Log.e(Constants.LOG_TAG, "Where Clause End");
-        Log.e(Constants.LOG_TAG, "subgroup name " + subgroupName);
+
         Cursor c = db.query(
                 CatalogContract.CatalogSubgroupFlavors.TABLE_NAME,                  // The table to query
                 projection,                                                  // The columns to return
@@ -67,19 +61,16 @@ public class Flavours {
                 sortOrder                                                    // The sort order
         );
 
-        Log.e(Constants.LOG_TAG, "Move to first");
+
         if(c.getCount()!=0){
 
             c.moveToFirst();
             if(c.isBeforeFirst()){
                 c.moveToNext();
             }
-            Log.e(Constants.LOG_TAG, "Start Loop");
+
             do{
                 subgroupFlavour = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS));
-
-                Log.e(Constants.LOG_TAG, "Subgroup Flavour: " + subgroupFlavour);
-
                 flavoursArrayList.add(new Flavours(subgroupFlavour));
 
             }while (c.moveToNext());
