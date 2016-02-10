@@ -1,25 +1,26 @@
-package br.com.brigaderiafina.brigaderiafina.adapters;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+        package br.com.brigaderiafina.brigaderiafina.adapters;
 
-import java.util.List;
+        import android.content.Context;
+        import android.content.Intent;
+        import android.support.v7.widget.RecyclerView;
+        import android.view.LayoutInflater;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.ImageView;
+        import android.widget.TextView;
 
-import br.com.brigaderiafina.brigaderiafina.R;
-import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
-import br.com.brigaderiafina.brigaderiafina.utils.Constants;
-import br.com.brigaderiafina.brigaderiafina.utils.Util;
+        import java.util.List;
+
+        import br.com.brigaderiafina.brigaderiafina.R;
+        import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
+        import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+        import br.com.brigaderiafina.brigaderiafina.utils.Util;
 
 public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.CustomViewHolder> {
 
     private List<Subgroups> subgroupsList;
-    private Context         mContext;
+    private Context mContext;
     private Util mUtil = new Util();
 
     public SubgroupsAdapter(Context context, List<Subgroups> subgroupsList) {
@@ -53,7 +54,7 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView subgroupPhoto;
-        TextView  subgroupName;
+        TextView subgroupName;
         TextView  subgroupPrice;
 
         public CustomViewHolder(View itemView) {
@@ -79,3 +80,6 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
     }
 
 }
+
+
+
