@@ -43,7 +43,6 @@ public class MenuHandler {
             mContext.startActivity(emailIntent.createChooser(emailIntent
                     ,mContext.getResources().getString(R.string.email_chooser_title)));
 
-
         }
 
 

@@ -1,7 +1,7 @@
 package br.com.brigaderiafina.brigaderiafina.utils;
 
 
-public class Constants {
+public abstract class Constants {
 
     public static final String GOURMET_LINE  = "Linha Gourmet";
     public static final String CHOCOLAT_LINE = "Linha Chocolat";

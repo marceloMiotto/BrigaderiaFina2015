@@ -31,6 +31,8 @@
         tools:context=".MainActivityFragment"
         android:orientation="vertical"
         android:id="@+id/menu_info_list_view"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         />
 
 

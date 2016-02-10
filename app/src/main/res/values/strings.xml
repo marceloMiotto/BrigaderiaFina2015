@@ -32,9 +32,9 @@
 
     <!-- email contato -->
     <string name="mailto">mailto:</string>
-    <string name="email">mmiotto@gmail.com</string>
-    <string name="email_subject">Email Test</string>
+    <string name="email">brigaderiafina@gmail.com</string>
+    <string name="email_subject">Contato APP</string>
     <string name="email_body">Gostaria de informações adicionais</string>
-    <string name="email_chooser_title">Send Email...</string>
+    <string name="email_chooser_title">Enviar Email...</string>
 
 </resources>

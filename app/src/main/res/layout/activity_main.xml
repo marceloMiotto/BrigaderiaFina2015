@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_fragment_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <include
         android:id="@+id/ToolBarId"
