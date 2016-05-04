@@ -39,6 +39,9 @@ dependencies {
     // Optional -- UI testing with Espresso
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
 
+    //images
+    compile 'com.squareup.picasso:picasso:2.5.2'
+
 }
 
 configurations.all {

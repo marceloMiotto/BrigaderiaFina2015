@@ -36,11 +36,12 @@ public abstract class Constants {
     public static final String OWM_MODULE_VERSION = "module_version";
 
     public static final String OWM_EVENTS         = "events";
-    public static final String OWM_EVENT_PHOTOS   = "event_photos";
+    public static final String OWM_EVENT_PHOTOS   = "event_fotos";
     public static final String OWM_SUBGROUP       = "subgroup";
     public static final String OWM_TYPE           = "type";
 
     public static final String OWM_PHOTOS         = "photos";
+
 
     /**
      * Subgroup Details

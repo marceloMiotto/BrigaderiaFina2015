@@ -244,11 +244,11 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
              */
             for (int i = 0; i < photosJSONArray.length(); i++) {
                 photoJSONObject = photosJSONArray.getJSONObject(i);
-                lineName = photoJSONObject.getString(Constants.OWM_LINE_NAME);
-                subgroupName = photoJSONObject.getString(Constants.OWM_LINE_NAME);
-                photosPath = photoJSONObject.getString(Constants.OWM_LINE_NAME);
+                lineName = photoJSONObject.getString("linha_nome");
+                subgroupName = photoJSONObject.getString("subgroup_name");
+                photosPath = photoJSONObject.getString("fotos_path");
 
-                Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString(Constants.OWM_LINE_NAME));
+                Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString("linha_nome"));
 
                 /**
                  * Photos Names
@@ -287,19 +287,12 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
     private void updateEventsDB(JSONObject catalogJson) {
 
         JSONObject eventsJSONObject;
-        JSONArray eventJSONArray;
-
-        String photoName;
-
-        String lineName;
-        String subgroupName;
-        String photosPath;
 
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         //clean tables to receive new data
-        db.delete(CatalogContract.CatalogSubgroupPhotos.TABLE_NAME, null, null);
+        db.delete(CatalogContract.Events.TABLE_NAME, null, null);
 
         try {
 
@@ -358,7 +351,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         //clean tables to receive new data
-        db.delete(CatalogContract.CatalogSubgroupPhotos.TABLE_NAME, null, null);
+        db.delete(CatalogContract.EventsPhotos.TABLE_NAME, null, null);
 
         try {
 

@@ -48,13 +48,13 @@ public class Subgroups {
 
         String[] projection = {
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME,
-                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME,
-                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE,
-                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_NAME,
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE,
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO
         };
 
         String sortOrder =
-                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME + " DESC";
+                CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_NAME + " DESC";
 
         String[] whereClauseValues = {lineName};
 
@@ -78,9 +78,9 @@ public class Subgroups {
 
             do{
 
-                subgroupName = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME));
-                subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE));
-                subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO));
+                subgroupName = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_NAME));
+                subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE));
+                subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO));
                 subgroups.add(new Subgroups(subgroupName, subgroupPrice, subgroupPhoto));
             }while (c.moveToNext());
         }

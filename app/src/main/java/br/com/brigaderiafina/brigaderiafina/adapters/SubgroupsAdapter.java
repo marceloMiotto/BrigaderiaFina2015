@@ -1,21 +1,23 @@
 
-        package br.com.brigaderiafina.brigaderiafina.adapters;
+package br.com.brigaderiafina.brigaderiafina.adapters;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.TextView;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-        import java.util.List;
+import java.util.List;
 
-        import br.com.brigaderiafina.brigaderiafina.R;
-        import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
-        import br.com.brigaderiafina.brigaderiafina.utils.Constants;
-        import br.com.brigaderiafina.brigaderiafina.utils.Util;
+import br.com.brigaderiafina.brigaderiafina.R;
+import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
+import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+import br.com.brigaderiafina.brigaderiafina.utils.Util;
+
+import com.squareup.picasso.Picasso;
 
 public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.CustomViewHolder> {
 
@@ -45,6 +47,7 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
         Subgroups sub = subgroupsList.get(position);
         viewHolder.subgroupName.setText(sub.subgroupName);
         viewHolder.subgroupPrice.setText("R$ "+mUtil.currencyFormat(sub.subgroupPrice));
+        Picasso.with(mContext).load(sub.subgroupPhoto).into(viewHolder.subgroupPhoto);
     }
 
     @Override
