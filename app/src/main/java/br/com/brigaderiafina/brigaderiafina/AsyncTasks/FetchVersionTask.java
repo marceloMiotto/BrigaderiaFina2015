@@ -19,7 +19,7 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
     /**
      * http://www.brigaderiafina.com.br/mobile/database/database.php?auth_id=4981bb031dc179bd13edbda08a64dd94&w=???
      * w Option:
-     * catalog_versions: server version of the catalog - subgroups, prices and events
+     * catalog_versions: server version of the catalog - subgroups and events
      */
 
     @Override
@@ -91,8 +91,23 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
     protected void updateCatalog(Context context, String type) {
 
-        FetchCatalogTask fetchCatalogTask = new FetchCatalogTask(context,type);
-        fetchCatalogTask.execute(context);
+        if(type.equals(Constants.OWM_SUBGROUPS)) {
+            FetchCatalogTask fetchCatalogTask = new FetchCatalogTask(context, Constants.OWM_SUBGROUPS);
+            fetchCatalogTask.execute(context);
+
+            FetchCatalogTask fetchCatalogPhotosTask = new FetchCatalogTask(context, Constants.OWM_SUBGROUP_PHOTOS);
+            fetchCatalogPhotosTask.execute(context);
+
+        }
+        else{
+
+            FetchCatalogTask fetchCatalogEventsTask = new FetchCatalogTask(context, Constants.OWM_EVENTS);
+            fetchCatalogEventsTask.execute(context);
+
+            FetchCatalogTask fetchCatalogEventsPhotosTask = new FetchCatalogTask(context, Constants.OWM_EVENT_PHOTOS);
+            fetchCatalogEventsPhotosTask.execute(context);
+
+        }
     }
 
 

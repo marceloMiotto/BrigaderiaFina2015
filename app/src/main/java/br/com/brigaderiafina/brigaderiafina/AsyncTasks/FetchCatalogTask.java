@@ -19,7 +19,7 @@ import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
     Context mContext;
-    String  mType;
+    String mType;
 
 
     /**
@@ -29,7 +29,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
      * events: photos and description of each event
      */
 
-    FetchCatalogTask(Context context, String type){
+    FetchCatalogTask(Context context, String type) {
         mType = type;
         mContext = context;
     }
@@ -39,36 +39,48 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         JSONFetch jsonFetch = new JSONFetch();
 
-        if(mType.equals(Constants.OWM_SUBGROUP)){
+        if (mType.equals(Constants.OWM_SUBGROUP)) {
             return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
-        }else{
+        } else {
             return jsonFetch.pullJSONData(Constants.OWM_EVENTS);
         }
 
     }
 
     @Override
-    protected void onPostExecute(JSONObject catalogJson){
+    protected void onPostExecute(JSONObject catalogJson) {
 
-        String     resultType;
+        String resultType;
 
         try {
 
             resultType = catalogJson.getString(Constants.OWM_TYPE);
 
-            if(resultType.equals(Constants.OWM_SUBGROUP)){
-                updateCatalogDB(catalogJson);
-            }else{
-                updateEventsDB();
-            }
+            switch (resultType) {
+                case Constants.OWM_SUBGROUP:
+                    updateCatalogDB(catalogJson);
+                    break;
 
-        }catch (JSONException e){
-            Log.e(Constants.LOG_TAG,e.getMessage());
+                case Constants.OWM_SUBGROUP_PHOTOS:
+                    updateCatalogPhotosDB(catalogJson);
+                    break;
+
+                case Constants.OWM_EVENTS:
+                    updateEventsDB(catalogJson);
+                    break;
+
+                case Constants.OWM_EVENT_PHOTOS:
+                    updateEventsPhotosDB(catalogJson);
+                    break;
+
+            }
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_TAG, e.getMessage());
         }
 
     }
 
-    protected void updateSharedPref(Context context){
+    protected void updateSharedPref(Context context, String type) {
 
 
         SharedPreferences sharedPref = context.getSharedPreferences(
@@ -76,30 +88,33 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
-        //Catalog
-        String subgroupModuleServer  = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
-                , context.getString(R.string.module_version_default_pref));
-        //Events
-        String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
-                , context.getString(R.string.module_version_default_pref));
+        if (type.equals(Constants.OWM_SUBGROUP)) {
 
+            //Catalog
+            String subgroupModuleServer = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
+                    , context.getString(R.string.module_version_default_pref));
+            editor.putString(context.getString(R.string.subgroup_module_version_app_pref), subgroupModuleServer);
+        } else {
+            //Events
+            String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
+                    , context.getString(R.string.module_version_default_pref));
+            editor.putString(context.getString(R.string.events_module_version_app_pref), eventsModuleServer);
 
-        editor.putString(context.getString(R.string.subgroup_module_version_app_pref),subgroupModuleServer);
-        editor.putString(context.getString(R.string.events_module_version_app_pref),eventsModuleServer);
+        }
 
         editor.commit();
 
 
     }
 
-    private void updateCatalogDB(JSONObject catalogJson){
+    private void updateCatalogDB(JSONObject catalogJson) {
 
         JSONObject lineJSONObject;
         JSONObject groupJSONObject;
-        JSONArray  groupJSONArray;
+        JSONArray groupJSONArray;
         JSONObject subgroupJSONObject;
-        JSONArray  subgroupJSONArray;
-        JSONArray  subFlavorJSONArray;
+        JSONArray subgroupJSONArray;
+        JSONArray subFlavorJSONArray;
 
         String lineName;
         String groupName;
@@ -112,8 +127,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         //clean tables to receive new data
-        db.delete(CatalogContract.CatalogSubgroupFlavors.TABLE_NAME,null,null);
-        db.delete(CatalogContract.CatalogSubgroup.TABLE_NAME,null,null);
+        db.delete(CatalogContract.CatalogSubgroupFlavors.TABLE_NAME, null, null);
+        db.delete(CatalogContract.CatalogSubgroup.TABLE_NAME, null, null);
 
         try {
 
@@ -124,7 +139,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
              */
             for (int i = 0; i < lineJSONArray.length(); i++) {
                 lineJSONObject = lineJSONArray.getJSONObject(i);
-                lineName       = lineJSONObject.getString(Constants.OWM_LINE_NAME);
+                lineName = lineJSONObject.getString(Constants.OWM_LINE_NAME);
                 Log.d(Constants.LOG_TAG, "Line Name " + lineJSONObject.getString(Constants.OWM_LINE_NAME));
 
                 /**
@@ -134,7 +149,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
                 for (int j = 0; j < groupJSONArray.length(); j++) {
                     groupJSONObject = groupJSONArray.getJSONObject(j);
-                    groupName  =  groupJSONObject.getString(Constants.OWM_GROUP_NAME);
+                    groupName = groupJSONObject.getString(Constants.OWM_GROUP_NAME);
 
                     Log.d(Constants.LOG_TAG, "Group Name: " + groupJSONObject.getString(Constants.OWM_GROUP_NAME));
 
@@ -145,9 +160,9 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
                     for (int m = 0; m < subgroupJSONArray.length(); m++) {
                         subgroupJSONObject = subgroupJSONArray.getJSONObject(m);
-                        subgroupName       = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_NAME);
-                        subgroupPrice      = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PRICE);
-                        subgroupPhoto      =  subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PHOTO);
+                        subgroupName = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_NAME);
+                        subgroupPrice = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PRICE);
+                        subgroupPhoto = subgroupJSONObject.getString(Constants.OWM_SUBGROUP_PHOTO);
 
                         /**
                          * Insert Subgroup
@@ -155,9 +170,9 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                         ContentValues catalogSubgroupValues = new ContentValues();
                         catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME, lineName);
                         catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_GROUP_NAME, groupName);
-                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME, subgroupName);
-                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE, subgroupPrice);
-                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO, subgroupPhoto);
+                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_NAME, subgroupName);
+                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE, subgroupPrice);
+                        catalogSubgroupValues.put(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO, subgroupPhoto);
 
                         // Insert the new row, returning the primary key value of the new row
                         long newCatalogSubgroupRowId;
@@ -180,7 +195,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                              * Insert Flavours
                              */
                             ContentValues catalogSubgroupFlavorsValues = new ContentValues();
-                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME,subgroupName);
+                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME, subgroupName);
                             catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS, subgroupFlavors);
                             // Insert the new row, returning the primary key value of the new row
                             long newCatalogSubgroupFlavorsRowId;
@@ -196,15 +211,200 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
             }
 
-            updateSharedPref(mContext);
+            updateSharedPref(mContext, Constants.OWM_SUBGROUP);
 
-        }catch (JSONException e){
-            Log.e(Constants.LOG_TAG,e.getMessage());
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_TAG, e.getMessage());
+        }
+    }
+
+    private void updateCatalogPhotosDB(JSONObject catalogJson) {
+
+        JSONObject photoJSONObject;
+        JSONArray photosNameJSONArray;
+
+        String photoName;
+
+        String lineName;
+        String subgroupName;
+        String photosPath;
+
+        CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        //clean tables to receive new data
+        db.delete(CatalogContract.CatalogSubgroupPhotos.TABLE_NAME, null, null);
+
+        try {
+
+            JSONArray photosJSONArray = catalogJson.getJSONArray(Constants.OWM_PHOTOS);
+
+            /**
+             * Photos
+             */
+            for (int i = 0; i < photosJSONArray.length(); i++) {
+                photoJSONObject = photosJSONArray.getJSONObject(i);
+                lineName = photoJSONObject.getString(Constants.OWM_LINE_NAME);
+                subgroupName = photoJSONObject.getString(Constants.OWM_LINE_NAME);
+                photosPath = photoJSONObject.getString(Constants.OWM_LINE_NAME);
+
+                Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString(Constants.OWM_LINE_NAME));
+
+                /**
+                 * Photos Names
+                 */
+                photosNameJSONArray = photoJSONObject.getJSONArray("fotos");
+
+                for (int j = 0; j < photosNameJSONArray.length(); j++) {
+
+                    photoName = photosNameJSONArray.getString(j);
+
+                    /**
+                     * Insert Subgroup Photos
+                     */
+                    ContentValues catalogSubgroupValues = new ContentValues();
+                    catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_LINE, lineName);
+                    catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_SUBGROUP_NAME, subgroupName);
+                    catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_NAME, photoName);
+                    catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_PATH, photosPath);
+
+                    // Insert the new row, returning the primary key value of the new row
+                    long newCatalogSubgroupRowId;
+                    newCatalogSubgroupRowId = db.insert(
+                            CatalogContract.CatalogSubgroupPhotos.TABLE_NAME,
+                            CatalogContract.COLUMN_NAME_NULLABLE,
+                            catalogSubgroupValues);
+
+                }
+
+            }
+
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_TAG, e.getMessage());
+        }
+    }
+
+    private void updateEventsDB(JSONObject catalogJson) {
+
+        JSONObject eventsJSONObject;
+        JSONArray eventJSONArray;
+
+        String photoName;
+
+        String lineName;
+        String subgroupName;
+        String photosPath;
+
+        CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        //clean tables to receive new data
+        db.delete(CatalogContract.CatalogSubgroupPhotos.TABLE_NAME, null, null);
+
+        try {
+
+            JSONArray eventsJSONArray = catalogJson.getJSONArray(Constants.OWM_EVENTS);
+
+            /**
+             * Photos
+             */
+            for (int i = 0; i < eventsJSONArray.length(); i++) {
+                eventsJSONObject = eventsJSONArray.getJSONObject(i);
+                String eventCode = eventsJSONObject.getString("codigo");
+                String eventName = eventsJSONObject.getString("name");
+                String eventType = eventsJSONObject.getString("type");
+                String eventPhotoCard = eventsJSONObject.getString("foto_card");
+                String eventDescription = eventsJSONObject.getString("description");
+
+                /**
+                 * Insert Subgroup Photos
+                 */
+                ContentValues eventsValues = new ContentValues();
+                eventsValues.put(CatalogContract.Events.COLUMN_NAME_EVENT_CODE, eventCode);
+                eventsValues.put(CatalogContract.Events.COLUMN_NAME_EVENT_NAME, eventName);
+                eventsValues.put(CatalogContract.Events.COLUMN_NAME_EVENT_TYPE, eventType);
+                eventsValues.put(CatalogContract.Events.COLUMN_NAME_EVENT_MAIN_PHOTO, eventPhotoCard);
+                eventsValues.put(CatalogContract.Events.COLUMN_NAME_EVENT_DESCRIPTION, eventDescription);
+
+                // Insert the new row, returning the primary key value of the new row
+                long newEventRowId;
+                newEventRowId = db.insert(
+                        CatalogContract.Events.TABLE_NAME,
+                        CatalogContract.COLUMN_NAME_NULLABLE,
+                        eventsValues);
+
+            }
+
+            updateSharedPref(mContext, Constants.OWM_EVENTS);
+
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_TAG, e.getMessage());
         }
     }
 
 
-    private void updateEventsDB(){
-      //TODO events update
+    private void updateEventsPhotosDB(JSONObject catalogJson) {
+
+        JSONObject photoJSONObject;
+        JSONArray photosNameJSONArray;
+
+        String photoName;
+
+        String lineName;
+        String eventCode;
+        String photosPath;
+
+        CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        //clean tables to receive new data
+        db.delete(CatalogContract.CatalogSubgroupPhotos.TABLE_NAME, null, null);
+
+        try {
+
+            JSONArray photosJSONArray = catalogJson.getJSONArray("fotos");
+
+            /**
+             * Photos
+             */
+            for (int i = 0; i < photosJSONArray.length(); i++) {
+                photoJSONObject = photosJSONArray.getJSONObject(i);
+                eventCode = photoJSONObject.getString("codigo");
+                photosPath = photoJSONObject.getString("foto_path");
+
+
+                Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString(Constants.OWM_LINE_NAME));
+
+                /**
+                 * Photos Names
+                 */
+                photosNameJSONArray = photoJSONObject.getJSONArray("fotos_nome");
+
+                for (int j = 0; j < photosNameJSONArray.length(); j++) {
+
+                    photoName = photosNameJSONArray.getString(j);
+
+                    /**
+                     * Insert Subgroup Photos
+                     */
+                    ContentValues eventPhotosValues = new ContentValues();
+                    eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_EVENT_CODE, eventCode);
+                    eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_NAME, photoName);
+                    eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_PATH, photosPath);
+
+                    // Insert the new row, returning the primary key value of the new row
+                    long newCatalogSubgroupRowId;
+                    newCatalogSubgroupRowId = db.insert(
+                            CatalogContract.EventsPhotos.TABLE_NAME,
+                            CatalogContract.COLUMN_NAME_NULLABLE,
+                            eventPhotosValues);
+
+                }
+
+            }
+
+        } catch (JSONException e) {
+            Log.e(Constants.LOG_TAG, e.getMessage());
+        }
     }
 }
