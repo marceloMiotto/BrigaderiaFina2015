@@ -82,6 +82,11 @@ public class Subgroups {
                 subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE));
                 subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO));
                 subgroups.add(new Subgroups(subgroupName, subgroupPrice, subgroupPhoto));
+
+                Log.e("Debug99",subgroupName);
+                Log.e("Debug99",subgroupPrice);
+                Log.e("Debug99",subgroupPhoto);
+
             }while (c.moveToNext());
         }
         c.close();

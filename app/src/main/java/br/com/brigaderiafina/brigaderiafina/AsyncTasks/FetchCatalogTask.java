@@ -39,10 +39,25 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         JSONFetch jsonFetch = new JSONFetch();
 
-        if (mType.equals(Constants.OWM_SUBGROUP)) {
-            return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
-        } else {
-            return jsonFetch.pullJSONData(Constants.OWM_EVENTS);
+        switch (mType){
+            case Constants.OWM_SUBGROUP:
+                return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
+
+
+            case Constants.OWM_SUBGROUP_PHOTO:
+                return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP_PHOTO);
+
+
+            case Constants.OWM_EVENTS:
+                return jsonFetch.pullJSONData(Constants.OWM_EVENTS);
+
+
+            case Constants.OWM_EVENT_PHOTOS:
+                return jsonFetch.pullJSONData(Constants.OWM_EVENT_PHOTOS);
+
+            default:
+                return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
+
         }
 
     }
@@ -56,21 +71,27 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
             resultType = catalogJson.getString(Constants.OWM_TYPE);
 
+            Log.e("Debug50","result type "+resultType);
+
             switch (resultType) {
                 case Constants.OWM_SUBGROUP:
                     updateCatalogDB(catalogJson);
+                    Log.e("Debug50","Catalogo Subgroup ok");
                     break;
 
                 case Constants.OWM_SUBGROUP_PHOTOS:
                     updateCatalogPhotosDB(catalogJson);
+                    Log.e("Debug50","Catalogo Subgroup Fotos ok");
                     break;
 
                 case Constants.OWM_EVENTS:
                     updateEventsDB(catalogJson);
+                    Log.e("Debug50","Catalogo Eventos ok");
                     break;
 
                 case Constants.OWM_EVENT_PHOTOS:
                     updateEventsPhotosDB(catalogJson);
+                    Log.e("Debug50","Catalogo Eventos Fotos ok");
                     break;
 
             }
@@ -88,12 +109,16 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
+        Log.e("Debug12","Type: "+type);
         if (type.equals(Constants.OWM_SUBGROUP)) {
 
             //Catalog
             String subgroupModuleServer = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
                     , context.getString(R.string.module_version_default_pref));
             editor.putString(context.getString(R.string.subgroup_module_version_app_pref), subgroupModuleServer);
+            Log.e("Debug12","Ok - "+subgroupModuleServer);
+
+
         } else {
             //Events
             String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
@@ -296,7 +321,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         try {
 
-            JSONArray eventsJSONArray = catalogJson.getJSONArray(Constants.OWM_EVENTS);
+            JSONArray eventsJSONArray = catalogJson.getJSONArray("eventos");
 
             /**
              * Photos
@@ -308,6 +333,13 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 String eventType = eventsJSONObject.getString("type");
                 String eventPhotoCard = eventsJSONObject.getString("foto_card");
                 String eventDescription = eventsJSONObject.getString("description");
+
+                Log.e("Debug6","eventCode "+eventCode);
+                Log.e("Debug6","eventName "+eventName);
+                Log.e("Debug6","eventType "+eventType);
+                Log.e("Debug6","eventPhotoCard "+eventPhotoCard);
+                Log.e("Debug6","eventDescription "+eventDescription);
+
 
                 /**
                  * Insert Subgroup Photos
@@ -343,7 +375,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         String photoName;
 
-        String lineName;
         String eventCode;
         String photosPath;
 

@@ -44,6 +44,9 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
                     versionJSONObject = versionJSONArray.getJSONObject(i);
                     editor.putString(versionJSONObject.getString(Constants.OWM_MODULE_NAME),versionJSONObject.getString(Constants.OWM_MODULE_VERSION ));
+
+                    Log.e("Debug6",versionJSONObject.getString(Constants.OWM_MODULE_NAME) + versionJSONObject.getString(Constants.OWM_MODULE_VERSION));
+
                     editor.commit();
 
                 }
@@ -78,12 +81,16 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
                 ,eventsModuleApp);
 
 
+        Log.e("Debug12","Module events: "+eventsModuleApp + " server: "+eventsModuleServer);
+        Log.e("Debug12","Module subgroup: "+subgroupModuleApp + " subgroup: "+subgroupModuleServer);
 
         if (!subgroupModuleApp.equals(subgroupModuleServer)) {
+            Log.e("Debug12","Subgroups");
             updateCatalog(context,Constants.OWM_SUBGROUP);
         }
 
         if (!eventsModuleApp.equals(eventsModuleServer)) {
+            Log.e("Debug12","Events");
             updateCatalog(context,Constants.OWM_EVENTS);
         }
 
@@ -91,7 +98,8 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
     protected void updateCatalog(Context context, String type) {
 
-        if(type.equals(Constants.OWM_SUBGROUPS)) {
+        if(type.equals(Constants.OWM_SUBGROUP)) {
+
             FetchCatalogTask fetchCatalogTask = new FetchCatalogTask(context, Constants.OWM_SUBGROUPS);
             fetchCatalogTask.execute(context);
 

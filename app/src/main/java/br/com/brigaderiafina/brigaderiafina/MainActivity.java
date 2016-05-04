@@ -2,10 +2,10 @@ package br.com.brigaderiafina.brigaderiafina;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.os.Bundle;
-
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void verifyCatalogVersion() {
-
+        Log.e("Debug12","Verify Version");
         FetchVersionTask fetchVersionTask = new FetchVersionTask();
         fetchVersionTask.execute(this);
     }

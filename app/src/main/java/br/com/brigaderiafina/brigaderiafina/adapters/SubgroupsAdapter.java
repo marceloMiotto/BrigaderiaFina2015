@@ -4,11 +4,14 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,10 +20,9 @@ import br.com.brigaderiafina.brigaderiafina.TabPageActivity;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 import br.com.brigaderiafina.brigaderiafina.utils.Util;
 
-import com.squareup.picasso.Picasso;
-
 public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.CustomViewHolder> {
 
+    private StringBuilder url = new StringBuilder(0);
     private List<Subgroups> subgroupsList;
     private Context mContext;
     private Util mUtil = new Util();
@@ -47,7 +49,18 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
         Subgroups sub = subgroupsList.get(position);
         viewHolder.subgroupName.setText(sub.subgroupName);
         viewHolder.subgroupPrice.setText("R$ "+mUtil.currencyFormat(sub.subgroupPrice));
-        Picasso.with(mContext).load(sub.subgroupPhoto).into(viewHolder.subgroupPhoto);
+
+        url.setLength(0);
+        url = url.append(Constants.SITE+sub.subgroupPhoto);
+
+        Log.e("Debug97",url + sub.subgroupPhoto);
+        Log.e("Debug98",sub.subgroupName);
+        Log.e("Debug98",sub.subgroupPrice);
+        Log.e("Debug98",sub.subgroupPhoto);
+
+        Log.e("Debug2",url.toString());
+        Picasso.with(mContext).load(url.toString()).into(viewHolder.subgroupPhoto);
+
     }
 
     @Override
@@ -59,7 +72,7 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
     public class CustomViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView subgroupPhoto;
-        TextView subgroupName;
+        TextView  subgroupName;
         TextView  subgroupPrice;
 
         public CustomViewHolder(View itemView) {

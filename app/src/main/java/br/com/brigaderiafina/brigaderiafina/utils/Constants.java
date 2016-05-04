@@ -36,7 +36,7 @@ public abstract class Constants {
     public static final String OWM_MODULE_VERSION = "module_version";
 
     public static final String OWM_EVENTS         = "events";
-    public static final String OWM_EVENT_PHOTOS   = "event_fotos";
+    public static final String OWM_EVENT_PHOTOS   = "event_photos";
     public static final String OWM_SUBGROUP       = "subgroup";
     public static final String OWM_TYPE           = "type";
 
@@ -59,4 +59,6 @@ public abstract class Constants {
      */
     public static final String MENU_INFO_ID    = "menu_info_id";
     public static final String MENU_INFO_ARRAY = "menu_info_array";
+
+    public static final String SITE = "http://www.brigaderiafina.com.br";
 }

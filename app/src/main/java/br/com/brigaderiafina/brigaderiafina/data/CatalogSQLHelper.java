@@ -13,9 +13,9 @@ public class CatalogSQLHelper {
                     CatalogContract.CatalogSubgroup._ID + " INTEGER PRIMARY KEY, "+
                     CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME      + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.CatalogSubgroup.COLUMN_NAME_GROUP_NAME     + TEXT_TYPE + COMMA_SEP +
-                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_NAME  + TEXT_TYPE + COMMA_SEP +
-                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PRICE + TEXT_TYPE + COMMA_SEP +
-                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGRUPO_PHOTO + TEXT_TYPE +
+                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_NAME  + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO + TEXT_TYPE +
                     " ) ";
 
     public static final String SQL_DROP_TABLE_CATALOG_SUBGROUPS =
@@ -58,6 +58,7 @@ public class CatalogSQLHelper {
                     CatalogContract.Events.COLUMN_NAME_EVENT_CODE        + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_NAME        + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_TYPE        + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.Events.COLUMN_NAME_EVENT_MAIN_PHOTO  + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_DESCRIPTION + TEXT_TYPE +
                     " ) ";
 
