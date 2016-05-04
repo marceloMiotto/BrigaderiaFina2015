@@ -180,8 +180,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                              * Insert Flavours
                              */
                             ContentValues catalogSubgroupFlavorsValues = new ContentValues();
-                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME,subgroupName);
-                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS, subgroupFlavors);
+                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME,subgroupName);
+                            catalogSubgroupFlavorsValues.put(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS, subgroupFlavors);
                             // Insert the new row, returning the primary key value of the new row
                             long newCatalogSubgroupFlavorsRowId;
                             newCatalogSubgroupFlavorsRowId = db.insert(
@@ -196,7 +196,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
             }
 
-            //TODO remove comments updateSharedPref(mcontext);
+            updateSharedPref(mContext);
 
         }catch (JSONException e){
             Log.e(Constants.LOG_TAG,e.getMessage());

@@ -1,38 +1,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:paddingBottom="16dp"
-    android:paddingStart="72dp"
-    android:paddingEnd="16dp"
-    android:paddingTop="16dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingBottom="16dp"
+              android:paddingEnd="16dp"
+              android:paddingStart="72dp"
+              android:paddingTop="16dp"
+              android:weightSum="4"
     >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
 
         <ImageView
             android:id="@+id/subgroupPhotoImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
             android:layout_alignParentLeft="true"
+            android:src="@mipmap/ic_launcher"
             />
 
         <TextView
             android:id="@+id/subgroupNameTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="@dimen/item_list_detail_padding"
             android:layout_weight="2"
+            android:padding="@dimen/item_list_detail_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             />
 
         <TextView
             android:id="@+id/subgroupPriceTextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:padding="@dimen/item_list_detail_padding"
             android:layout_weight="1"
-            />
-
+            android:gravity="end"
+            android:minWidth="@dimen/item_list_price"
+            android:padding="@dimen/item_list_detail_padding"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+    </LinearLayout>
 </LinearLayout>

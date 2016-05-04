@@ -40,12 +40,12 @@ public class Flavours {
          */
 
         String[] projection = {
-                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME,
-                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS
+                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME,
+                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS
         };
 
         String sortOrder =
-                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS + " DESC";
+                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS + " DESC";
 
 
         String[] whereClauseValues = {subgroupName};
@@ -54,7 +54,7 @@ public class Flavours {
         Cursor c = db.query(
                 CatalogContract.CatalogSubgroupFlavors.TABLE_NAME,                  // The table to query
                 projection,                                                  // The columns to return
-                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME+"=?",  // The columns for the WHERE clause
+                CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME+"=?",  // The columns for the WHERE clause
                 whereClauseValues,                                           // The values for the WHERE clause
                 null,                                                        // don't group the rows
                 null,                                                        // don't filter by row groups
@@ -70,7 +70,7 @@ public class Flavours {
             }
 
             do{
-                subgroupFlavour = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS));
+                subgroupFlavour = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS));
                 flavoursArrayList.add(new Flavours(subgroupFlavour));
 
             }while (c.moveToNext());

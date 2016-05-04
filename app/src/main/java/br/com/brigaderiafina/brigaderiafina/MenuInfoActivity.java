@@ -26,9 +26,9 @@ public class MenuInfoActivity extends AppCompatActivity {
 
         String [] mMenuArray = getIntent().getStringArrayExtra(Constants.MENU_INFO_ARRAY);
         ListView rv = (ListView) findViewById(R.id.menu_info_list_view);
-        ArrayAdapter<String> mAdapater = new ArrayAdapter<String>(this,R.layout.item_list_menu_info
+        ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this,R.layout.item_list_menu_info
                 ,R.id.menuInfoTextView,mMenuArray);
-        rv.setAdapter(mAdapater);
+        rv.setAdapter(mAdapter);
 
     }
 

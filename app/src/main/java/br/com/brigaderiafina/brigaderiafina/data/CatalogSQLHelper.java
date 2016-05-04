@@ -27,12 +27,27 @@ public class CatalogSQLHelper {
     public static final String SQL_CREATE_CATALOG_SUBGROUP_FLAVORS =
             "CREATE TABLE " + CatalogContract.CatalogSubgroupFlavors.TABLE_NAME + " ( " +
                     CatalogContract.CatalogSubgroupFlavors._ID + "INTEGER PRIMARY KEY, "+
-                    CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_NAME     + TEXT_TYPE + COMMA_SEP +
-                    CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGRUPO_FLAVORS  + TEXT_TYPE +
+                    CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME    + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_FLAVORS + TEXT_TYPE +
                     " ) ";
 
     public static final String SQL_DROP_TABLE_CATALOG_SUBGROUP_FLAVORS =
             "DROP TABLE IF EXISTS " + CatalogContract.CatalogSubgroupFlavors.TABLE_NAME;
+
+    /**
+     * CatalogSubgroupPhotos
+     */
+    public static final String SQL_CREATE_CATALOG_SUBGROUP_PHOTOS =
+            "CREATE TABLE " + CatalogContract.CatalogSubgroupPhotos.TABLE_NAME + " ( " +
+                    CatalogContract.CatalogSubgroupPhotos._ID + "INTEGER PRIMARY KEY, "+
+                    CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_LINE           + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_SUBGROUP_NAME  + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_PATH    + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_NAME    + TEXT_TYPE +
+                    " ) ";
+
+    public static final String SQL_DROP_TABLE_CATALOG_SUBGROUP_PHOTOS =
+            "DROP TABLE IF EXISTS " + CatalogContract.CatalogSubgroupPhotos.TABLE_NAME;
 
     /**
      * Events
@@ -42,11 +57,23 @@ public class CatalogSQLHelper {
                     CatalogContract.Events._ID + "INTEGER PRIMARY KEY, "+
                     CatalogContract.Events.COLUMN_NAME_EVENT_CODE        + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_NAME        + TEXT_TYPE + COMMA_SEP +
-                    CatalogContract.Events.COLUMN_NAME_EVENT_DATE        + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_TYPE        + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.Events.COLUMN_NAME_EVENT_DESCRIPTION + TEXT_TYPE +
                     " ) ";
 
     public static final String SQL_DROP_TABLE_EVENTS =
             "DROP TABLE IF EXISTS " + CatalogContract.Events.TABLE_NAME;
+
+
+    public static final String SQL_CREATE_EVENTS_PHOTOS =
+            "CREATE TABLE " + CatalogContract.EventsPhotos.TABLE_NAME + " ( " +
+                    CatalogContract.EventsPhotos._ID + "INTEGER PRIMARY KEY, "+
+                    CatalogContract.EventsPhotos.COLUMN_NAME_EVENT_CODE       + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_PATH      + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_NAME      + TEXT_TYPE +
+                    " ) ";
+
+    public static final String SQL_DROP_TABLE_EVENTS_PHOTOS =
+            "DROP TABLE IF EXISTS " + CatalogContract.EventsPhotos.TABLE_NAME;
+
 }

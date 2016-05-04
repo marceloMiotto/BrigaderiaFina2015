@@ -33,6 +33,8 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
     public CustomViewHolder onCreateViewHolder(ViewGroup parent, int position) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_detail,null);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        view.setLayoutParams(lp);
         CustomViewHolder viewHolder = new CustomViewHolder(view);
         return viewHolder;
     }

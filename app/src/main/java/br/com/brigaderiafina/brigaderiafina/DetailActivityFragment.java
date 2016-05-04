@@ -16,6 +16,7 @@ import br.com.brigaderiafina.brigaderiafina.adapters.EventsAdapter;
 import br.com.brigaderiafina.brigaderiafina.adapters.Subgroups;
 import br.com.brigaderiafina.brigaderiafina.adapters.SubgroupsAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
+import br.com.brigaderiafina.brigaderiafina.utils.DividerItemDecoration;
 
 
 public class DetailActivityFragment extends Fragment{
@@ -44,6 +45,8 @@ public class DetailActivityFragment extends Fragment{
         }else{
             Subgroups sub = new Subgroups(getActivity());
             ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
+            //Add item decoration
+            rv.addItemDecoration(new DividerItemDecoration(getActivity()));
             mSubgroups = new SubgroupsAdapter(getActivity(),s);
             rv.setAdapter(mSubgroups);
         }
