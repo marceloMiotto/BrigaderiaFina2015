@@ -32,12 +32,13 @@ public class TabPageActivityPhotosFragment extends Fragment {
      * The number of pages (wizard steps) to show in this demo.
      */
     private static final int NUM_PAGES = 5;
-
+    int mNumPhotos;
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
      */
     private ViewPager mPager;
+    List<SubgroupPhotos> mS;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -58,10 +59,13 @@ public class TabPageActivityPhotosFragment extends Fragment {
         mSubgroupChoosen = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
         mLineChoosen     = intent.getStringExtra(Constants.LINE_NAME);
 
-        List<SubgroupPhotos> s = subPhotos.getSubgroupPhotos(mLineChoosen,mSubgroupChoosen);
+        mS = subPhotos.getSubgroupPhotos(mLineChoosen,mSubgroupChoosen);
         //test
 
-        for(SubgroupPhotos f : s){
+
+
+        for(SubgroupPhotos f : mS){
+            mNumPhotos = Integer.parseInt(f.subgroupNumPhoto);
             Log.i(Constants.LOG_TAG, "SubgroupPhotos debug " + f.subgroupPhotos);
         }
 
@@ -77,18 +81,26 @@ public class TabPageActivityPhotosFragment extends Fragment {
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
+        String mUrl = "http://www.brigaderiafina.com.br";
+
         public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
+            Log.e("Debug19","step3");
         }
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create("http://www.brigaderiafina.com.br/mobile/fotos/categorias/chocolat/trufas/trufa.png");
+            Log.e("Debug19","step2");
+            SubgroupPhotos test = mS.get(position);
+
+            Log.e("Debug19url",mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
+            return ScreenSlidePageFragment.create(mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
         }
 
         @Override
         public int getCount() {
-            return 1;//NUM_PAGES;
+            Log.e("Debug19","step1");
+            return mNumPhotos;//NUM_PAGES;
         }
     }
 }

@@ -101,11 +101,11 @@ public class SubgroupPhotos {
 
                 subgroupPhoto.add(new SubgroupPhotos(subgroupLine, subgroupName, subgroupPhotoPath,subgroupPhotos,subgroupNumPhoto));
 
-                Log.e("Debug99", subgroupLine);
-                Log.e("Debug99", subgroupName);
-                Log.e("Debug99", subgroupPhotoPath);
-                Log.e("Debug99", subgroupPhotos);
-                Log.e("Debug99", subgroupNumPhoto);
+                Log.e("Debug73", subgroupLine);
+                Log.e("Debug73", subgroupName);
+                Log.e("Debug73", subgroupPhotoPath);
+                Log.e("Debug73", subgroupPhotos);
+                Log.e("Debug73", subgroupNumPhoto);
 
             } while (c.moveToNext());
         }
