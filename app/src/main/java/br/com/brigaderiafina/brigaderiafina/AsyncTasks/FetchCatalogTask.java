@@ -39,13 +39,16 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         JSONFetch jsonFetch = new JSONFetch();
 
+        Log.e("Debug7","type: "+mType);
+
+
         switch (mType){
             case Constants.OWM_SUBGROUP:
                 return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
 
 
-            case Constants.OWM_SUBGROUP_PHOTO:
-                return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP_PHOTO);
+            case Constants.OWM_SUBGROUP_PHOTOS:
+                return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP_PHOTOS);
 
 
             case Constants.OWM_EVENTS:
@@ -253,6 +256,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
         String lineName;
         String subgroupName;
         String photosPath;
+        String numPhotos;
 
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -272,6 +276,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 lineName = photoJSONObject.getString("linha_nome");
                 subgroupName = photoJSONObject.getString("subgroup_name");
                 photosPath = photoJSONObject.getString("fotos_path");
+                numPhotos  = photoJSONObject.getString("num_fotos");
 
                 Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString("linha_nome"));
 
@@ -292,6 +297,13 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                     catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_SUBGROUP_NAME, subgroupName);
                     catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_NAME, photoName);
                     catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_PATH, photosPath);
+                    catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_NUM_PHOTOS, numPhotos);
+
+                    Log.e("Debug7","lineName "+lineName);
+                    Log.e("Debug7","subgroupName "+subgroupName);
+                    Log.e("Debug7","photoName "+photoName);
+                    Log.e("Debug7","photosPath "+photosPath);
+                    Log.e("Debug7","numPhotos "+numPhotos);
 
                     // Insert the new row, returning the primary key value of the new row
                     long newCatalogSubgroupRowId;
@@ -377,6 +389,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         String eventCode;
         String photosPath;
+        String numPhotos;
 
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -395,6 +408,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 photoJSONObject = photosJSONArray.getJSONObject(i);
                 eventCode = photoJSONObject.getString("codigo");
                 photosPath = photoJSONObject.getString("foto_path");
+                numPhotos  = photoJSONObject.getString("num_fotos");
 
 
                 Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString(Constants.OWM_LINE_NAME));
@@ -415,6 +429,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                     eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_EVENT_CODE, eventCode);
                     eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_NAME, photoName);
                     eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_PATH, photosPath);
+                    eventPhotosValues.put(CatalogContract.EventsPhotos.COLUMN_NAME_NUM_PHOTOS, numPhotos);
 
                     // Insert the new row, returning the primary key value of the new row
                     long newCatalogSubgroupRowId;

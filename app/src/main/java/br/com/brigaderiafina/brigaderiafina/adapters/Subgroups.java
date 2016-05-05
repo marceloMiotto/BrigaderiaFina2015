@@ -16,6 +16,7 @@ public class Subgroups {
     public String subgroupName;
     public String subgroupPrice;
     public String subgroupPhoto;
+
     Context mContext;
 
     public Subgroups(Context context){

@@ -26,10 +26,12 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
     private List<Subgroups> subgroupsList;
     private Context mContext;
     private Util mUtil = new Util();
+    public  String mLineName;
 
-    public SubgroupsAdapter(Context context, List<Subgroups> subgroupsList) {
+    public SubgroupsAdapter(Context context,String lineName, List<Subgroups> subgroupsList) {
         this.subgroupsList = subgroupsList;
         this.mContext = context;
+        this.mLineName = lineName;
 
     }
 
@@ -92,6 +94,7 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
             Subgroups sub = subgroupsList.get(position);
             Intent intent = new Intent(mContext, TabPageActivity.class);
             intent.putExtra(Constants.SUBGROUP_DETAILS,sub.subgroupName);
+            intent.putExtra(Constants.LINE_NAME,mLineName);
             mContext.startActivity(intent);
 
         }

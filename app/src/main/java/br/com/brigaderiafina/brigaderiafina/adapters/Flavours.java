@@ -52,13 +52,13 @@ public class Flavours {
 
 
         Cursor c = db.query(
-                CatalogContract.CatalogSubgroupFlavors.TABLE_NAME,                  // The table to query
-                projection,                                                  // The columns to return
+                CatalogContract.CatalogSubgroupFlavors.TABLE_NAME,                      // The table to query
+                projection,                                                             // The columns to return
                 CatalogContract.CatalogSubgroupFlavors.COLUMN_NAME_SUBGROUP_NAME+"=?",  // The columns for the WHERE clause
-                whereClauseValues,                                           // The values for the WHERE clause
-                null,                                                        // don't group the rows
-                null,                                                        // don't filter by row groups
-                sortOrder                                                    // The sort order
+                whereClauseValues,                                                      // The values for the WHERE clause
+                null,                                                                   // don't group the rows
+                null,                                                                   // don't filter by row groups
+                sortOrder                                                               // The sort order
         );
 
 

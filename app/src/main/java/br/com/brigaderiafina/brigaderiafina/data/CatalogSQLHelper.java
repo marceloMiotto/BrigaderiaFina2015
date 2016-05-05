@@ -43,6 +43,7 @@ public class CatalogSQLHelper {
                     CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_LINE           + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_SUBGROUP_NAME  + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_PATH    + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_NUM_PHOTOS     + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_NAME    + TEXT_TYPE +
                     " ) ";
 
@@ -71,6 +72,7 @@ public class CatalogSQLHelper {
                     CatalogContract.EventsPhotos._ID + "INTEGER PRIMARY KEY, "+
                     CatalogContract.EventsPhotos.COLUMN_NAME_EVENT_CODE       + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_PATH      + TEXT_TYPE + COMMA_SEP +
+                    CatalogContract.EventsPhotos.COLUMN_NAME_NUM_PHOTOS       + TEXT_TYPE + COMMA_SEP +
                     CatalogContract.EventsPhotos.COLUMN_NAME_PHOTOS_NAME      + TEXT_TYPE +
                     " ) ";
 

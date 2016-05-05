@@ -29,7 +29,7 @@ public class TabPageActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private String mSubgroupName;//test
 
-    private static String SUBGROUP_FLAVOURS = "subgrupoDetailFlavoursFragment";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

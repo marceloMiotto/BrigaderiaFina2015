@@ -47,7 +47,7 @@ public class DetailActivityFragment extends Fragment{
             ArrayList<Subgroups> s = sub.getSubgroups(mLineChoosen);
             //Add item decoration
             rv.addItemDecoration(new DividerItemDecoration(getActivity()));
-            mSubgroups = new SubgroupsAdapter(getActivity(),s);
+            mSubgroups = new SubgroupsAdapter(getActivity(),mLineChoosen,s);
             rv.setAdapter(mSubgroups);
         }
 
