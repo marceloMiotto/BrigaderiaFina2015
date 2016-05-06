@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import br.com.brigaderiafina.brigaderiafina.adapters.EventPhotos;
 import br.com.brigaderiafina.brigaderiafina.adapters.SubgroupPhotos;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
@@ -35,6 +36,7 @@ public class TabPageActivityPhotosFragment extends Fragment {
      */
     private ViewPager mPager;
     List<SubgroupPhotos> mS;
+    List<EventPhotos> mE;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -51,15 +53,26 @@ public class TabPageActivityPhotosFragment extends Fragment {
         mPager = (ViewPager) view.findViewById(R.id.pager);
         Intent intent = getActivity().getIntent();
 
-        SubgroupPhotos subPhotos = new SubgroupPhotos(getActivity());
+
         mSubgroupChoosen = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
         mLineChoosen     = intent.getStringExtra(Constants.LINE_NAME);
 
-        mS = subPhotos.getSubgroupPhotos(mLineChoosen,mSubgroupChoosen);
-
-        for(SubgroupPhotos f : mS){
-            mNumPhotos = Integer.parseInt(f.subgroupNumPhoto);
-            Log.i(Constants.LOG_TAG, "SubgroupPhotos debug " + f.subgroupPhotos);
+        Log.e("Debug4","eventcode "+mLineChoosen);
+        if(mSubgroupChoosen.contains("Evento")){
+            EventPhotos evePhotos = new EventPhotos(getActivity());
+            mE = evePhotos.getEventPhotos(mLineChoosen); //using the same logic the store the event code
+            Log.e("Debug4","found events");
+            for(EventPhotos f : mE){
+                mNumPhotos = Integer.parseInt(f.eventNumPhotos);
+                Log.i("Debug4", "EventPhotos debug " + f.eventNumPhotos);
+            }
+        }else{
+            SubgroupPhotos subPhotos = new SubgroupPhotos(getActivity());
+            mS = subPhotos.getSubgroupPhotos(mLineChoosen,mSubgroupChoosen);
+            for(SubgroupPhotos f : mS){
+                mNumPhotos = Integer.parseInt(f.subgroupNumPhoto);
+                Log.i(Constants.LOG_TAG, "SubgroupPhotos debug " + f.subgroupPhotos);
+            }
         }
 
         mPagerAdapter = new ScreenSlidePagerAdapter(getActivity().getSupportFragmentManager());
@@ -79,8 +92,14 @@ public class TabPageActivityPhotosFragment extends Fragment {
         @Override
         public Fragment getItem(int position) {
 
-            SubgroupPhotos test = mS.get(position);
-            return ScreenSlidePageFragment.create(mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
+            if(mSubgroupChoosen.contains("Evento")){
+                EventPhotos test = mE.get(position);
+                return ScreenSlidePageFragment.create(mUrl + test.eventPhotoPath + test.eventPhotosName);
+            }else{
+                SubgroupPhotos test = mS.get(position);
+                return ScreenSlidePageFragment.create(mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
+            }
+
         }
 
         @Override

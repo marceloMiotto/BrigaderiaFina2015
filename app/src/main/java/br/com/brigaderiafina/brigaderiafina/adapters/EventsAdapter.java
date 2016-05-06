@@ -44,7 +44,9 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
 
             Events evs = mEvents.get(position);
             Intent intent = new Intent(mContext, TabPageActivity.class);
-            intent.putExtra(Constants.SUBGROUP_DETAILS, evs.mEventTitle);
+            intent.putExtra(Constants.SUBGROUP_DETAILS, "Evento");
+            intent.putExtra(Constants.LINE_NAME,evs.mEventCode);
+            intent.putExtra("EventDescription",evs.mDescription);
             mContext.startActivity(intent);
         }
     }
