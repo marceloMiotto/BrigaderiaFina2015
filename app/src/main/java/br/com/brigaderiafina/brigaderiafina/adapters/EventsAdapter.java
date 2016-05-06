@@ -3,10 +3,14 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -19,15 +23,18 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
     private static String LOG_TAG = "EventsAdapter";
     private ArrayList<Events> mEvents;
     private Context mContext;
+    private StringBuilder url = new StringBuilder(0);
 
     public class DataObjectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView label;
-        TextView dateTime;
+        TextView  eventTitle;
+        TextView  eventType;
+        ImageView eventMainPhoto;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
-            label = (TextView) itemView.findViewById(R.id.textView);
-            dateTime = (TextView) itemView.findViewById(R.id.textView2);
+            eventTitle     = (TextView) itemView.findViewById(R.id.event_title);
+            eventType      = (TextView) itemView.findViewById(R.id.event_type);
+            eventMainPhoto = (ImageView) itemView.findViewById(R.id.event_main_image);
             itemView.setOnClickListener(this);
         }
 
@@ -37,7 +44,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
 
             Events evs = mEvents.get(position);
             Intent intent = new Intent(mContext, TabPageActivity.class);
-            intent.putExtra(Constants.SUBGROUP_DETAILS, evs.mText1);
+            intent.putExtra(Constants.SUBGROUP_DETAILS, evs.mEventTitle);
             mContext.startActivity(intent);
         }
     }
@@ -59,8 +66,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.label.setText(mEvents.get(position).mText1);
-        holder.dateTime.setText(mEvents.get(position).mText2);
+        holder.eventTitle.setText(mEvents.get(position).mEventTitle);
+        holder.eventType.setText(mEvents.get(position).mEventType);
+        url.setLength(0);
+        url.append(Constants.SITE+mEvents.get(position).mEventMainPhoto);
+        Log.e("Debug91","url "+url.toString());
+        Picasso.with(mContext).load(url.toString()).into(holder.eventMainPhoto);
     }
 
     public void addItem(Events dataObj, int index) {

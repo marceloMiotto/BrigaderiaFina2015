@@ -28,10 +28,6 @@ public class TabPageActivityPhotosFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * The number of pages (wizard steps) to show in this demo.
-     */
-    private static final int NUM_PAGES = 5;
     int mNumPhotos;
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -60,9 +56,6 @@ public class TabPageActivityPhotosFragment extends Fragment {
         mLineChoosen     = intent.getStringExtra(Constants.LINE_NAME);
 
         mS = subPhotos.getSubgroupPhotos(mLineChoosen,mSubgroupChoosen);
-        //test
-
-
 
         for(SubgroupPhotos f : mS){
             mNumPhotos = Integer.parseInt(f.subgroupNumPhoto);
@@ -75,11 +68,6 @@ public class TabPageActivityPhotosFragment extends Fragment {
         return view;
     }
 
-
-    /**
-     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
-     * sequence.
-     */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
         String mUrl = "http://www.brigaderiafina.com.br";
 
@@ -90,17 +78,14 @@ public class TabPageActivityPhotosFragment extends Fragment {
 
         @Override
         public Fragment getItem(int position) {
-            Log.e("Debug19","step2");
-            SubgroupPhotos test = mS.get(position);
 
-            Log.e("Debug19url",mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
+            SubgroupPhotos test = mS.get(position);
             return ScreenSlidePageFragment.create(mUrl + test.subgroupPhotoPath + test.subgroupPhotos);
         }
 
         @Override
         public int getCount() {
-            Log.e("Debug19","step1");
-            return mNumPhotos;//NUM_PAGES;
+            return mNumPhotos;
         }
     }
 }

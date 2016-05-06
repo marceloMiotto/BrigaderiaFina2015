@@ -39,7 +39,8 @@ public class DetailActivityFragment extends Fragment{
         if(mLineChoosen.equals(Constants.EVENT_LINE)){
             //Card View
             rv.setHasFixedSize(true);
-            mAdapter = new EventsAdapter(getActivity(),getDataSet());
+            Events eve = new Events(getActivity());
+            mAdapter = new EventsAdapter(getActivity(),eve.getEvents());
             rv.setAdapter(mAdapter);
 
         }else{
@@ -55,14 +56,5 @@ public class DetailActivityFragment extends Fragment{
         return view;
     }
 
-    //Events sample data
-    private ArrayList<Events> getDataSet() {
-        ArrayList results = new ArrayList<Events>();
-        for (int index = 0; index < 20; index++) {
-            Events obj = new Events("Evento " + index,"Teste " + index);
-            results.add(index, obj);
-        }
-        return results;
-    }
 }
 

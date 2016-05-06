@@ -56,8 +56,8 @@ public class TabPageActivity extends AppCompatActivity {
             adapter.addFragment(new TabPageActivityDescriptionFragment(),"Descrição" );
 
         }else{
-            adapter.addFragment(new TabPageActivityDescriptionFragment(),Constants.TAB_FLAVOUR );
             adapter.addFragment(new TabPageActivityPhotosFragment(), Constants.TAB_PHOTO);
+            adapter.addFragment(new TabPageActivityDescriptionFragment(),Constants.TAB_FLAVOUR );
         }
 
         viewPager.setAdapter(adapter);
