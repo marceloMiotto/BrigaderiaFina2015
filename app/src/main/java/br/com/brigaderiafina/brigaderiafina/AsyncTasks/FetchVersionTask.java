@@ -28,7 +28,7 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
         JSONObject versionJSONObject;
 
         SharedPreferences sharedPref = context[0].getSharedPreferences(
-                context[0].getString(R.string.file_key_pref), context[0].MODE_PRIVATE);
+                context[0].getString(R.string.file_key_pref), Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -45,9 +45,7 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
                     versionJSONObject = versionJSONArray.getJSONObject(i);
                     editor.putString(versionJSONObject.getString(Constants.OWM_MODULE_NAME),versionJSONObject.getString(Constants.OWM_MODULE_VERSION ));
 
-                    Log.e("Debug6",versionJSONObject.getString(Constants.OWM_MODULE_NAME) + versionJSONObject.getString(Constants.OWM_MODULE_VERSION));
-
-                    editor.commit();
+                    editor.apply();
 
                 }
 
@@ -63,9 +61,7 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
     protected void onPostExecute(Context context){
 
         SharedPreferences sharedPref = context.getSharedPreferences(
-                context.getString(R.string.file_key_pref), context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPref.edit();
+                context.getString(R.string.file_key_pref), Context.MODE_PRIVATE);
 
         //Catalog
         String subgroupModuleApp  = sharedPref.getString(context.getString(R.string.subgroup_module_version_app_pref)
@@ -80,17 +76,11 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
         String eventsModuleServer = sharedPref.getString(context.getString(R.string.events_module_version_server_pref)
                 ,eventsModuleApp);
 
-
-        Log.e("Debug12","Module events: "+eventsModuleApp + " server: "+eventsModuleServer);
-        Log.e("Debug12","Module subgroup: "+subgroupModuleApp + " subgroup: "+subgroupModuleServer);
-
         if (!subgroupModuleApp.equals(subgroupModuleServer)) {
-            Log.e("Debug12","Subgroups");
             updateCatalog(context,Constants.OWM_SUBGROUP);
         }
 
         if (!eventsModuleApp.equals(eventsModuleServer)) {
-            Log.e("Debug12","Events");
             updateCatalog(context,Constants.OWM_EVENTS);
         }
 

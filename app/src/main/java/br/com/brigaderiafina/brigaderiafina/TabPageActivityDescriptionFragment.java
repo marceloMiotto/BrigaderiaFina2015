@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
 import br.com.brigaderiafina.brigaderiafina.adapters.Flavours;
 import br.com.brigaderiafina.brigaderiafina.adapters.FlavoursAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
@@ -47,13 +47,6 @@ public class TabPageActivityDescriptionFragment extends Fragment {
             Flavours fla = new Flavours(getActivity());
             mSubgroupChoosen = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
             ArrayList<Flavours> f = fla.getFlavors(mSubgroupChoosen);
-            //test
-            Flavours fa = new Flavours(getActivity());
-            for(int i=0;i<f.size();i++){
-                fa = f.get(i);
-                Log.i(Constants.LOG_TAG, "Flavours debug " + fa.flavours);
-            }
-
             mFlavours = new FlavoursAdapter(getActivity(),f);
 
             rv.setAdapter(mFlavours);

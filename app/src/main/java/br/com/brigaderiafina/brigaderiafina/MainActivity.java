@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import br.com.brigaderiafina.brigaderiafina.AsyncTasks.FetchVersionTask;
+import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 import br.com.brigaderiafina.brigaderiafina.utils.MenuHandler;
 
 
@@ -31,9 +32,13 @@ public class MainActivity extends AppCompatActivity {
         /*
         ** Added from http://stackoverflow.com/questions/4776933/android-application-icon-not-showing-up
          */
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        try {
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+            getSupportActionBar().setDisplayUseLogoEnabled(true);
+        }catch(RuntimeException e){
+            Log.e(Constants.LOG_TAG,e.getMessage());
+        }
         /*
         ** Added End
          */
@@ -53,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void verifyCatalogVersion() {
-        Log.e("Debug12","Verify Version");
         FetchVersionTask fetchVersionTask = new FetchVersionTask();
         fetchVersionTask.execute(this);
     }

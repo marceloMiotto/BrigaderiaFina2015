@@ -3,7 +3,6 @@ package br.com.brigaderiafina.brigaderiafina;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import br.com.brigaderiafina.brigaderiafina.adapters.LinesAdapter;
+
 import br.com.brigaderiafina.brigaderiafina.adapters.Lines;
+import br.com.brigaderiafina.brigaderiafina.adapters.LinesAdapter;
 import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 
@@ -68,7 +68,6 @@ public class MainActivityFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra(Constants.LINE_NAME, lineChoosen);
-                Log.i(Constants.LOG_TAG, "Line Name " + lineChoosen + position);
                 startActivity(intent);
 
             }

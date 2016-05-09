@@ -39,9 +39,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         JSONFetch jsonFetch = new JSONFetch();
 
-        Log.e("Debug7","type: "+mType);
-
-
         switch (mType){
             case Constants.OWM_SUBGROUP:
                 return jsonFetch.pullJSONData(Constants.OWM_SUBGROUP);
@@ -56,7 +53,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
 
             case Constants.OWM_EVENT_PHOTOS:
-                Log.e("Debug4","found json ");
                 return jsonFetch.pullJSONData(Constants.OWM_EVENT_PHOTOS);
 
             default:
@@ -75,17 +71,13 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
             resultType = catalogJson.getString(Constants.OWM_TYPE);
 
-            Log.e("Debug50","result type "+resultType);
-
             switch (resultType) {
                 case Constants.OWM_SUBGROUP:
                     updateCatalogDB(catalogJson);
-                    Log.e("Debug50","Catalogo Subgroup ok");
                     break;
 
                 case Constants.OWM_SUBGROUP_PHOTOS:
                     updateCatalogPhotosDB(catalogJson);
-                    Log.e("Debug50","Catalogo Subgroup Fotos ok");
                     break;
 
                 case Constants.OWM_EVENTS:
@@ -95,7 +87,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
                 case Constants.OWM_EVENT_PHOTOS:
                     updateEventsPhotosDB(catalogJson);
-                    Log.e("Debug50","Catalogo Eventos Fotos ok");
                     break;
 
             }
@@ -109,7 +100,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
 
         SharedPreferences sharedPref = context.getSharedPreferences(
-                context.getString(R.string.file_key_pref), context.MODE_PRIVATE);
+                context.getString(R.string.file_key_pref), Context.MODE_PRIVATE);
 
         SharedPreferences.Editor editor = sharedPref.edit();
 
@@ -120,7 +111,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
             String subgroupModuleServer = sharedPref.getString(context.getString(R.string.subgroup_module_version_server_pref)
                     , context.getString(R.string.module_version_default_pref));
             editor.putString(context.getString(R.string.subgroup_module_version_app_pref), subgroupModuleServer);
-            Log.e("Debug12","Ok - "+subgroupModuleServer);
 
 
         } else {
@@ -131,7 +121,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         }
 
-        editor.commit();
+        editor.apply();
 
 
     }
@@ -169,8 +159,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
             for (int i = 0; i < lineJSONArray.length(); i++) {
                 lineJSONObject = lineJSONArray.getJSONObject(i);
                 lineName = lineJSONObject.getString(Constants.OWM_LINE_NAME);
-                Log.d(Constants.LOG_TAG, "Line Name " + lineJSONObject.getString(Constants.OWM_LINE_NAME));
-
                 /**
                  * Group
                  */
@@ -179,8 +167,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 for (int j = 0; j < groupJSONArray.length(); j++) {
                     groupJSONObject = groupJSONArray.getJSONObject(j);
                     groupName = groupJSONObject.getString(Constants.OWM_GROUP_NAME);
-
-                    Log.d(Constants.LOG_TAG, "Group Name: " + groupJSONObject.getString(Constants.OWM_GROUP_NAME));
 
                     /**
                      * Subgroup
@@ -279,7 +265,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 photosPath = photoJSONObject.getString("fotos_path");
                 numPhotos  = photoJSONObject.getString("num_fotos");
 
-                Log.d(Constants.LOG_TAG, "Photo " + photoJSONObject.getString("linha_nome"));
 
                 /**
                  * Photos Names
@@ -300,11 +285,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                     catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_PHOTOS_PATH, photosPath);
                     catalogSubgroupValues.put(CatalogContract.CatalogSubgroupPhotos.COLUMN_NAME_NUM_PHOTOS, numPhotos);
 
-                    Log.e("Debug7","lineName "+lineName);
-                    Log.e("Debug7","subgroupName "+subgroupName);
-                    Log.e("Debug7","photoName "+photoName);
-                    Log.e("Debug7","photosPath "+photosPath);
-                    Log.e("Debug7","numPhotos "+numPhotos);
 
                     // Insert the new row, returning the primary key value of the new row
                     long newCatalogSubgroupRowId;
@@ -347,13 +327,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
                 String eventPhotoCard = eventsJSONObject.getString("foto_card");
                 String eventDescription = eventsJSONObject.getString("description");
 
-                Log.e("Debug6","eventCode "+eventCode);
-                Log.e("Debug6","eventName "+eventName);
-                Log.e("Debug6","eventType "+eventType);
-                Log.e("Debug6","eventPhotoCard "+eventPhotoCard);
-                Log.e("Debug6","eventDescription "+eventDescription);
-
-
                 /**
                  * Insert Subgroup Photos
                  */
@@ -395,7 +368,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         //clean tables to receive new data
         db.delete(CatalogContract.EventsPhotos.TABLE_NAME, null, null);
-        Log.e("Debug4", "Get Class ");
 
         try {
 
@@ -421,13 +393,6 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
                     photoName = photosNameJSONArray.getString(j);
 
-                    Log.e("Debug4","eventCode "+eventCode);
-                    Log.e("Debug4","photoName "+photoName);
-                    Log.e("Debug4","photosPath "+photosPath);
-                    Log.e("Debug4","numPhotos "+numPhotos);
-
-
-
                     /**
                      * Insert Subgroup Photos
                      */
@@ -449,7 +414,7 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
             }
 
         } catch (JSONException e) {
-            Log.e("Debug4", e.getMessage());
+            Log.e(Constants.LOG_TAG, e.getMessage());
         }
     }
 }

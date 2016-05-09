@@ -36,7 +36,11 @@ public class TabPageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         mSubgroupName = intent.getStringExtra(Constants.SUBGROUP_DETAILS);
-        getSupportActionBar().setTitle(mSubgroupName);
+        try {
+            getSupportActionBar().setTitle(mSubgroupName);
+        }catch (RuntimeException e){
+            Log.e(Constants.LOG_TAG,e.getMessage());
+        }
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -47,8 +51,6 @@ public class TabPageActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        //Test
-        Log.e("Debug21",mSubgroupName);
         if (mSubgroupName.contains("Evento")) {
             adapter.addFragment(new TabPageActivityPhotosFragment(), Constants.TAB_PHOTO);
             adapter.addFragment(new TabPageActivityDescriptionFragment(),"Descrição" );

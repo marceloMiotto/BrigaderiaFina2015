@@ -16,20 +16,8 @@ public class ScreenSlidePageFragment extends Fragment {
     ImageView mImageView;
     static String    mUrl;
 
-    /**
-     * The argument key for the page number this fragment represents.
-     */
-    public static final String ARG_PAGE = "page";
     public static final String ARG_URL  = "url";
 
-    /**
-     * The fragment's page number, which is set to the argument value for {@link #ARG_PAGE}.
-     */
-    private int mPageNumber;
-
-    /**
-     * Factory method for this fragment class. Constructs a new fragment for the given page number.
-     */
     public static ScreenSlidePageFragment create(String url) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
         Bundle args = new Bundle();
@@ -62,10 +50,4 @@ public class ScreenSlidePageFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * Returns the page number represented by this fragment object.
-     */
-    public int getPageNumber() {
-        return mPageNumber;
-    }
 }

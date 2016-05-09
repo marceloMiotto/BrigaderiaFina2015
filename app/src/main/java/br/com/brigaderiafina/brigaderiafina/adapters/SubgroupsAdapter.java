@@ -4,7 +4,6 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,8 +40,8 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_detail,null);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(lp);
-        CustomViewHolder viewHolder = new CustomViewHolder(view);
-        return viewHolder;
+        return new CustomViewHolder(view);
+
     }
 
     @Override
@@ -50,17 +49,11 @@ public class SubgroupsAdapter extends RecyclerView.Adapter<SubgroupsAdapter.Cust
 
         Subgroups sub = subgroupsList.get(position);
         viewHolder.subgroupName.setText(sub.subgroupName);
-        viewHolder.subgroupPrice.setText("R$ "+mUtil.currencyFormat(sub.subgroupPrice));
+        String value = "R$ "+mUtil.currencyFormat(sub.subgroupPrice);
+        viewHolder.subgroupPrice.setText(value);
 
         url.setLength(0);
-        url = url.append(Constants.SITE+sub.subgroupPhoto);
-
-        Log.e("Debug97",url + sub.subgroupPhoto);
-        Log.e("Debug98",sub.subgroupName);
-        Log.e("Debug98",sub.subgroupPrice);
-        Log.e("Debug98",sub.subgroupPhoto);
-
-        Log.e("Debug2",url.toString());
+        url = url.append(Constants.SITE).append(sub.subgroupPhoto);
         Picasso.with(mContext).load(url.toString()).into(viewHolder.subgroupPhoto);
 
     }
