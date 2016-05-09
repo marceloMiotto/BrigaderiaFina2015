@@ -4,13 +4,11 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.data.CatalogContract;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
-import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 public class Flavours {
 
@@ -27,11 +25,8 @@ public class Flavours {
 
     public ArrayList<Flavours> getFlavors(String subgroupName){
 
-        ArrayList<Flavours> flavoursArrayList = new ArrayList<Flavours>();
+        ArrayList<Flavours> flavoursArrayList = new ArrayList<>();
 
-        if(mContext != null){
-            Log.e(Constants.LOG_TAG, "Context up!");
-        }
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 

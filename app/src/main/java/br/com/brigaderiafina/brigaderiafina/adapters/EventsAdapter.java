@@ -3,7 +3,6 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +61,8 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view_row, parent, false);
 
-        DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
-        return dataObjectHolder;
+        return new DataObjectHolder(view);
+
     }
 
     @Override
@@ -71,8 +70,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.DataObject
         holder.eventTitle.setText(mEvents.get(position).mEventTitle);
         holder.eventType.setText(mEvents.get(position).mEventType);
         url.setLength(0);
-        url.append(Constants.SITE+mEvents.get(position).mEventMainPhoto);
-        Log.e("Debug91","url "+url.toString());
+        url.append(Constants.SITE).append(mEvents.get(position).mEventMainPhoto);
         Picasso.with(mContext).load(url.toString()).into(holder.eventMainPhoto);
     }
 

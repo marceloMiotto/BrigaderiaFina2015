@@ -3,13 +3,11 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.data.CatalogContract;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
-import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 public class Subgroups {
 
@@ -34,18 +32,14 @@ public class Subgroups {
     public ArrayList<Subgroups> getSubgroups(String lineName){
 
 
-        if(mContext != null){
-            Log.e(Constants.LOG_TAG,"Context up!");
-        }
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
-        ArrayList<Subgroups> subgroups = new ArrayList<Subgroups>();
+        ArrayList<Subgroups> subgroups = new ArrayList<>();
 
         /**
          * CatalogSubgroup
          */
-        Log.e(Constants.LOG_TAG, "Catalog Subgroup");
 
         String[] projection = {
                 CatalogContract.CatalogSubgroup.COLUMN_NAME_LINE_NAME,
@@ -83,10 +77,6 @@ public class Subgroups {
                 subgroupPrice = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PRICE));
                 subgroupPhoto = c.getString(c.getColumnIndexOrThrow(CatalogContract.CatalogSubgroup.COLUMN_NAME_SUBGROUP_PHOTO));
                 subgroups.add(new Subgroups(subgroupName, subgroupPrice, subgroupPhoto));
-
-                Log.e("Debug99",subgroupName);
-                Log.e("Debug99",subgroupPrice);
-                Log.e("Debug99",subgroupPhoto);
 
             }while (c.moveToNext());
         }

@@ -3,13 +3,11 @@ package br.com.brigaderiafina.brigaderiafina.adapters;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 
 import br.com.brigaderiafina.brigaderiafina.data.CatalogContract;
 import br.com.brigaderiafina.brigaderiafina.data.CatalogDbHelper;
-import br.com.brigaderiafina.brigaderiafina.utils.Constants;
 
 public class Events {
     public String  mEventTitle;
@@ -19,7 +17,7 @@ public class Events {
     public Context mContext;
     public String  mDescription;
 
-    public Events(Context context){ mContext = context;};
+    public Events(Context context){ mContext = context;}
 
     public Events(String eventTitle, String eventType, String eventMainPhoto, String eventCode, String eventDescription){
         mEventTitle     = eventTitle;
@@ -32,9 +30,6 @@ public class Events {
     public ArrayList<Events> getEvents(){
 
 
-        if(mContext != null){
-            Log.e(Constants.LOG_TAG,"Context up!");
-        }
         CatalogDbHelper mDbHelper = new CatalogDbHelper(mContext);
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
@@ -43,7 +38,7 @@ public class Events {
         /**
          * Events
          */
-        Log.e(Constants.LOG_TAG, "Events database");
+
 
         String[] projection = {
                 CatalogContract.Events.COLUMN_NAME_EVENT_CODE,
@@ -82,11 +77,6 @@ public class Events {
                    mDescription    = c.getString(c.getColumnIndexOrThrow(CatalogContract.Events.COLUMN_NAME_EVENT_DESCRIPTION));
                    events.add(new Events(mEventTitle, mEventType, mEventMainPhoto, mEventCode, mDescription));
 
-                Log.e("Debug95",mEventCode);
-                Log.e("Debug95",mEventTitle);
-                Log.e("Debug95",mEventType);
-                Log.e("Debug95",mEventMainPhoto);
-                Log.e("Debug95",mDescription);
 
             }while (c.moveToNext());
         }
