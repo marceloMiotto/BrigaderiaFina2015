@@ -90,6 +90,7 @@ public class EventPhotos {
             } while (c.moveToNext());
         }
         c.close();
+        db.close();
 
         return eventPhotos;
     }

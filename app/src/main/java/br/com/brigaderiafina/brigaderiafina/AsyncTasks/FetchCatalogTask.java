@@ -230,6 +230,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         } catch (JSONException e) {
             Log.e(Constants.LOG_TAG, e.getMessage());
+        }finally {
+            db.close();
         }
     }
 
@@ -299,6 +301,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         } catch (JSONException e) {
             Log.e(Constants.LOG_TAG, e.getMessage());
+        }finally {
+            db.close();
         }
     }
 
@@ -350,6 +354,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         } catch (JSONException e) {
             Log.e(Constants.LOG_TAG, e.getMessage());
+        }finally {
+            db.close();
         }
     }
 
@@ -415,6 +421,8 @@ public class FetchCatalogTask extends AsyncTask<Context, Void, JSONObject> {
 
         } catch (JSONException e) {
             Log.e(Constants.LOG_TAG, e.getMessage());
+        }finally {
+            db.close();
         }
     }
 }

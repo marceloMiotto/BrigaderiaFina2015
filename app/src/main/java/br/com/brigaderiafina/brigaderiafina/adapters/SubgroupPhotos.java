@@ -97,6 +97,7 @@ public class SubgroupPhotos {
             } while (c.moveToNext());
         }
         c.close();
+        db.close();
 
         return subgroupPhoto;
     }

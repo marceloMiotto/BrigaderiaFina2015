@@ -81,7 +81,7 @@ public class Events {
             }while (c.moveToNext());
         }
         c.close();
-
+        db.close();
         return events;
     }
 

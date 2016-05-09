@@ -81,6 +81,7 @@ public class Subgroups {
             }while (c.moveToNext());
         }
         c.close();
+        db.close();
 
         return subgroups;
     }

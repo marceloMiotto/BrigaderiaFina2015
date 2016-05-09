@@ -71,6 +71,7 @@ public class Flavours {
             }while (c.moveToNext());
         }
         c.close();
+        db.close();
 
         return flavoursArrayList;
     }
