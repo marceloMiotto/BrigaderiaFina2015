@@ -17,7 +17,7 @@ public abstract class Constants {
      */
     public static final String AUTH_ID            = "auth_id";
     public static final String API_KEY            = "4981bb031dc179bd13edbda08a64dd94";
-    public static final String CATALOG_BASE_URL   = "http://www.brigaderiafina.com.br/mobile/database/database.php?";
+    public static final String CATALOG_BASE_URL   = "http://brigaderiafina.com.br/webapi/mobile?";
     public static final String QUERY_PARAMETER    = "w";
 
     public static final String OWM_CATALOG         = "catalogo";

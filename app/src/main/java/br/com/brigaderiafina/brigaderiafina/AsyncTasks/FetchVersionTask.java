@@ -17,8 +17,8 @@ public class FetchVersionTask extends AsyncTask<Context, Void, Context> {
 
 
     /**
-     * http://www.brigaderiafina.com.br/mobile/database/database.php?auth_id=4981bb031dc179bd13edbda08a64dd94&w=???
-     * w Option:
+     * http://brigaderiafina.com.br/webapi/mobile?auth_id=4981bb031dc179bd13edbda08a64dd94&w=???
+     * w Options:
      * catalog_versions: server version of the catalog - subgroups and events
      */
 
